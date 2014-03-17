@@ -1,4 +1,1 @@
-liftoff
-=======
-
-Meteor Examples
+Liftoff - Get your Meteor project off the ground.

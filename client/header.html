@@ -1,0 +1,29 @@
+<template name="header">
+  <nav class="navbar navbar-default" role="navigation">
+    <div class="container-fluid">
+      
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#main-navbar-collapse">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="{{pathFor 'home'}}">Liftoff</a>
+      </div>
+      
+      <div class="collapse navbar-collapse" id="main-navbar-collapse">
+        <ul class="nav navbar-nav">
+          <li class="{{activeRouteClass 'home'}}"><a href="{{pathFor 'home'}}">Home</a></li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+          {{loginButtons}}
+        </ul>
+
+      </div>
+    </div>
+  </nav>
+  
+  <hr/>
+  <!-- TODO alerts -->
+</template>
