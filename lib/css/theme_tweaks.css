@@ -1,0 +1,7 @@
+body {
+  padding-top: 70px;
+}
+
+.login-buttons-dropdown-align-right#login-buttons + li .dropdown-menu {
+  right: 15px;
+}
