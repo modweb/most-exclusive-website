@@ -3,9 +3,6 @@ Router.configure({
   loadingTemplate: 'loading'
 });
 
-RouteController = {};
-RouteController.home = 
-
 Router.map( function () {
   
   this.route('home', {
