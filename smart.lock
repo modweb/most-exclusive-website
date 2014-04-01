@@ -4,10 +4,7 @@
     "basePackages": {
       "bootstrap-3": {},
       "iron-router": {},
-      "accounts-ui-bootstrap-3": {
-        "git": "https://github.com/mangasocial/meteor-accounts-ui-bootstrap-3.git",
-        "branch": "blaze"
-      }
+      "accounts-ui-bootstrap-3": {}
     },
     "packages": {
       "bootstrap-3": {
@@ -22,8 +19,8 @@
       },
       "accounts-ui-bootstrap-3": {
         "git": "https://github.com/mangasocial/meteor-accounts-ui-bootstrap-3.git",
-        "branch": "blaze",
-        "commit": "f10f1bf86da1045eda2da7248f971cd7720d934f"
+        "tag": "v0.3.0-1",
+        "commit": "93ffa5d0e325dc7026de89f6d90c178fa04bdd3a"
       },
       "blaze-layout": {
         "git": "https://github.com/EventedMind/blaze-layout.git",
