@@ -4,8 +4,9 @@
 # but you can also edit it by hand.
 
 standard-app-packages
-bootstrap-3
-iron-router
+iron:router
 accounts-password
-accounts-ui-bootstrap-3
+mrt:accounts-ui-bootstrap-3@0.3.0-1
 coffeescript
+mizzao:bootstrap-3
+
