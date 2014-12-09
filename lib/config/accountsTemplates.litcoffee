@@ -1,6 +1,6 @@
 # Configure Accounts Template
 
-    AccountsTemplates.configure({
+    AccountsTemplates.configure
       confirmPassword: true,
       enablePasswordChange: true,
       forbidClientAccountCreation: false,
@@ -8,7 +8,7 @@
       sendVerificationEmail: false,
 
       showAddRemoveServices: false,
-      showForgotPasswordLink: false,
+      showForgotPasswordLink: true,
       showLabels: true,
       showPlaceholders: true,
 
@@ -25,12 +25,10 @@
       homeRoutePath: '/',
       redirectTimeout: 4000,
 
-      texts: {
-        button: {
+      texts:
+        navSignIn: 'Sign In'
+        navSignOut: 'Logout'
+        button:
           signUp: 'Register'
-        },
-        title: {
+        title:
           forgotPwd: 'Recover Your Password'
-        },
-      }
-    })
