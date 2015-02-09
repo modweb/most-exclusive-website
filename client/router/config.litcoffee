@@ -10,11 +10,7 @@
       isLoggedIn: ->
         Router.go 'home' unless Meteor.loggingIn() or Meteor.user()
 
+Login filter, except public routes
+
     Router.onBeforeAction filters.isLoggedIn,
-      except: [ 'home', 'about', 'atSignIn' ] #public routes go here
-
-## useraccounts:core routes
-
-    AccountsTemplates.configureRoute 'signIn'
-    AccountsTemplates.configureRoute 'forgotPwd'
-    AccountsTemplates.configureRoute 'changePwd'
+      except: [ 'home', 'about', 'atSignIn', 'atSignUp', 'atForgotPwd', 'atResetPwd', 'atVerifyEmail', 'atEnrollAccount', 'atChangePwd' ]

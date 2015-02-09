@@ -32,3 +32,14 @@
           signUp: 'Register'
         title:
           forgotPwd: 'Recover Your Password'
+
+## Routes
+
+    AccountsTemplates.configureRoute 'changePwd'
+    AccountsTemplates.configureRoute 'enrollAccount'
+    AccountsTemplates.configureRoute 'forgotPwd'
+    AccountsTemplates.configureRoute 'resetPwd'
+    AccountsTemplates.configureRoute 'signIn'
+    AccountsTemplates.configureRoute 'signUp'
+    AccountsTemplates.configureRoute 'verifyEmail'
+    AccountsTemplates.configureRoute 'ensureSignedIn'
