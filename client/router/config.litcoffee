@@ -13,4 +13,14 @@
 Login filter, except public routes
 
     Router.onBeforeAction filters.isLoggedIn,
-      except: [ 'home', 'about', 'atSignIn', 'atSignUp', 'atForgotPwd', 'atResetPwd', 'atVerifyEmail', 'atEnrollAccount', 'atChangePwd' ]
+      except: [
+        'home'
+        'about'
+        'atSignIn'
+        'atSignUp'
+        'atForgotPwd'
+        'atResetPwd'
+        'atVerifyEmail'
+        'atEnrollAccount'
+        'atChangePwd'
+      ]
