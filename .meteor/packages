@@ -6,10 +6,9 @@
 standard-app-packages
 iron:router
 coffeescript
-mizzao:bootstrap-3
-html5cat:bootstrap-material-design
 useraccounts:bootstrap
 accounts-password
-
 zimme:iron-router-active
 natestrauser:connection-banner
+fezvrasta:bootstrap-material-design
+fortawesome:fontawesome
