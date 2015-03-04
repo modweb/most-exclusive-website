@@ -1,8 +1,7 @@
 <template name="layout">
+  {{> connectionBanner}}
+  {{> header}}
   <div class="container">
-    {{> header}}
-    <div id="main" class="row-fluid">
-      {{> yield}}
-    </div>
+    {{> yield}}
   </div>
 </template>
