@@ -2,9 +2,8 @@
 
 Example controller
 
-```
-@RouteControllers =
-  example: RouteController.extend
-    waitOn: -> Meteor.subscribe 'example'
-    data: -> someDataExample: ExampleCollection.find()
-```
+
+    @RouteControllers =
+      queue: RouteController.extend
+        waitOn: -> Meteor.subscribe 'queue'
+        data: -> []
