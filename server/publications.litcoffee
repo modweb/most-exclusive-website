@@ -1,4 +1,4 @@
 # Publications
 
-    Meteor.publish 'queue', ->
-      console.log this
+    Meteor.publish 'queueMeta', ->
+      QueueMeta.find()

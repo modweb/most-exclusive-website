@@ -5,5 +5,5 @@ Example controller
 
     @RouteControllers =
       queue: RouteController.extend
-        waitOn: -> Meteor.subscribe 'queue'
-        data: -> []
+        waitOn: -> Meteor.subscribe 'queueMeta'
+        data: -> QueueMeta.findOne()

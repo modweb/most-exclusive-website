@@ -21,13 +21,12 @@ ConnectionSchema has an ascending index on `ticketNumber`
         type: Number
       averageWaitTimeSeconds:
         type: Number
-        optional: yes
       totalWaitTimeSeconds:
         type: Number
-        optional: yes
+      totalVisitors:
+        type: Number
       nextTicketNumber:
         type: Number
-        optional: yes
 
     QueueProcessedSchema = new SimpleSchema
       connection:
@@ -39,15 +38,15 @@ ConnectionSchema has an ascending index on `ticketNumber`
         max: 20
         optional: yes
 
-    Queue = new Meteor.Collection 'queue'
+    @Queue = new Meteor.Collection 'queue'
     Queue.attachSchema ConnectionSchema
 
 There is only ever one Queue Meta.
 
-    QueueMeta = new Meteor.Collection 'queueMeta'
+    @QueueMeta = new Meteor.Collection 'queueMeta'
     QueueMeta.attachSchema QueueMetaSchema
 
-    QueueProcess = new Meteor.Collection 'queueProcessed'
+    @QueueProcess = new Meteor.Collection 'queueProcessed'
     QueueProcess.attachSchema QueueProcessedSchema
 
     Meteor.methods
