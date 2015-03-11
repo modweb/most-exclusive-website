@@ -7,7 +7,8 @@ ConnectionSchema has an ascending index on `ticketNumber`
         type: Number
         index: 1
       connectionId:
-        type: Number
+        type: String
+        max: 20
       name:
         type: String
       timeEnqueued:
@@ -74,7 +75,7 @@ Get the next ticketNumber
 Create queue object
 
         connection =
-          ticketNumber: ticketNumber
+          ticketNumber: nextTicketNumber
           connectionId: this.connection.id
           name: name
           timeEnqueued: new Date Date.UTC()
@@ -92,3 +93,5 @@ Update the queueMeta
           $set: nextTicketNumber: nextTicketNumber
 
         QueueMeta.update criteria, update
+
+        return connection

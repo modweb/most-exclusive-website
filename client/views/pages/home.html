@@ -1,13 +1,9 @@
 <template name='home'>
-  <div class='row'>
-    <h1>Welcome to the most exclusive website, ever.</h1>
-    <h3>What is this place?</h3>
-    <p>Well, it's just what it sounds like. This is the most exclusive website in the Universe.</p>
-    <h3>How do I get in?</h3>
-    <p>Get in line...the back of it.</p>
-    <h3>How does it work?</h3>
-    <p>Only one person is allowed in at a time, and only for 1 minute.</p>
-    <h3>What is the point of this?</h3>
-    <p>That depends on what you mean by 'is' and 'point' and 'this'...but seriously, what's the point of 90% of the Internet?</p>
-  </div>
+  Currently serving ticket <b>#{{this.queueMeta.currentTicketNumber}}</b>.<br>
+  There are <b>{{lineLength}}</b> people in line.<br>
+  {{#if queueEntry}}
+    You are currently in line. Your ticket number is #{{queueEntry.ticketNumber}}.
+  {{else}}
+    <button class='btn btn-success queueInLine'>Get in line</button>
+  {{/if}}
 </template>

@@ -1,7 +1,7 @@
 /* hack to fix minor bug in fezvrasta:bootstrap-material-design
    see: https://github.com/FezVrasta/bootstrap-material-design/issues/394
 */
-.btn:not(.btn-link):not(.btn-flat), .btn-default:not(.btn-link):not(.btn-flat) {
+.btn-default:not(.btn-link):not(.btn-flat) {
   color: black;
 }
 
