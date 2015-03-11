@@ -4,7 +4,3 @@
 .btn-default:not(.btn-link):not(.btn-flat) {
   color: black;
 }
-
-body {
-  padding-top: 70px;
-}

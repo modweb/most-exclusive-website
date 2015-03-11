@@ -44,7 +44,6 @@ Remove the connection
           criteria =
             connectionId: queueMeta.theOnlyConnectionAllowedIn.connectionId
 
-          console.log 'removeing connection from queue', criteria
           Queue.remove criteria
 
 Now serving the next ticket number
@@ -64,8 +63,6 @@ If there is a nextConnection (i.e. someone waiting in line), then serve them.
 Otherwise clear out theOnlyConnectionAllowedIn.
 
         if nextConnection?
-
-          console.log 'attempting to serve next connection: '
           timeCurrentTicketExpires = moment.utc()
           timeCurrentTicketExpires.add 1, 'minutes'
           _.extend update.$set,
@@ -84,8 +81,6 @@ Note, fake data is filled in to pass schema, even though we're $unset'ing
             theOnlyConnectionAllowedIn: ""
 
         criteria = _id: queueMeta._id
-
-        console.log update
         QueueMeta.update criteria, update
 
 TODO: keep it DRY; logic isn't exactly shared and want to keep update atomic to

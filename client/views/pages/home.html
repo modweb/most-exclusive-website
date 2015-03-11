@@ -1,12 +1,30 @@
 <template name='home'>
-  Currently serving ticket <b>#{{this.queueMeta.currentlyServingTicketNumber}}</b>.<br>
-  There are <b>{{lineLength}}</b> people in line.<br>
-  {{#if queueEntry}}
-    You are currently in line. Your ticket number is #{{queueEntry.ticketNumber}}.<br>
-    {{#if isBeingServed}}
-      <h2>You're in!!!! You have until {{> dateUTC value=this.queueMeta.timeCurrentTicketExpires}}.</h2>
-    {{/if}}
-  {{else}}
-    <button class='btn btn-success queueInLine'>Take a ticket #{{queueEntry.nextTicketNumber}}</button>
-  {{/if}}
+  <h1>Most Exclusive Website</h1>
+  <h3>One visitor is allowed in at a time, and only for 1 minute.</h3>
+  <div class='jumbotron'>
+    <div class='row'>
+      <div class='col-md-6 col-sm-12'>
+        <p class='h2'>Currently serving ticket <b>#{{this.queueMeta.currentlyServingTicketNumber}}</b></p>
+      </div>
+      <div class='col-md-6 col-sm-12'>
+        {{#if $eq lineLength 1}}
+          <p class='h2'>There is <b>{{lineLength}}</b> person in line.</p>
+        {{else}}
+          <p class='h2'>There are <b>{{lineLength}}</b> people in line.</p>
+        {{/if}}
+      </div>
+    </div>
+    <div class='row'>
+      <div class='col-sm-12'>
+        {{#if queueEntry}}
+          You are currently in line. Your ticket number is #{{queueEntry.ticketNumber}}.<br>
+          {{#if isBeingServed}}
+            <h2>You're in!!!! You have until {{> dateUTC value=this.queueMeta.timeCurrentTicketExpires}}.</h2>
+          {{/if}}
+        {{else}}
+          <button class='btn btn-lg btn-info queueInLine'>Take ticket #{{this.queueMeta.nextTicketNumber}}</button>
+        {{/if}}
+      </div>
+    </div>
+  </div>
 </template>
