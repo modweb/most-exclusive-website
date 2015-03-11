@@ -1,5 +1,5 @@
 <template name='home'>
-  Currently serving ticket <b>#{{this.queueMeta.currentTicketNumber}}</b>.<br>
+  Currently serving ticket <b>#{{this.queueMeta.currentlyServingTicketNumber}}</b>.<br>
   There are <b>{{lineLength}}</b> people in line.<br>
   {{#if queueEntry}}
     You are currently in line. Your ticket number is #{{queueEntry.ticketNumber}}.

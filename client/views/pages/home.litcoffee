@@ -1,6 +1,6 @@
     Template.home.helpers
       lineLength: ->
-          this.queueMeta.nextTicketNumber - this.queueMeta.currentTicketNumber - 1
+          this.queueMeta.nextTicketNumber - this.queueMeta.currentlyServingTicketNumber - 1
       queueEntry: -> Session.get 'queueEntry'
 
     Template.home.events

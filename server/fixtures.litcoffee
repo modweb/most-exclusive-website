@@ -6,8 +6,9 @@ but for now we'll keep it simple and only ever have 1 queue.
 
     if QueueMeta.find().count() is 0
       queueMeta =
-        currentTicketNumber: 0
+        currentlyServingTicketNumber: 1
         averageWaitTimeSeconds: 0
+        timeCurrentTicketExpires: moment.utc().toDate()
         totalWaitTimeSeconds: 0
         totalVisitors: 0
         nextTicketNumber: 1

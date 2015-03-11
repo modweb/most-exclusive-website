@@ -11,6 +11,7 @@ ConnectionSchema has an ascending index on `ticketNumber`
         max: 20
       name:
         type: String
+        max: 100
       timeEnqueued:
         type: Date
 
@@ -18,8 +19,10 @@ ConnectionSchema has an ascending index on `ticketNumber`
       theOnlyConnectionAllowedIn:
         type: ConnectionSchema
         optional: yes
-      currentTicketNumber:
+      currentlyServingTicketNumber:
         type: Number
+      timeCurrentTicketExpires:
+        type: Date
       averageWaitTimeSeconds:
         type: Number
       totalWaitTimeSeconds:
@@ -47,8 +50,8 @@ There is only ever one Queue Meta.
     @QueueMeta = new Meteor.Collection 'queueMeta'
     QueueMeta.attachSchema QueueMetaSchema
 
-    @QueueProcess = new Meteor.Collection 'queueProcessed'
-    QueueProcess.attachSchema QueueProcessedSchema
+    @QueueProcessed = new Meteor.Collection 'queueProcessed'
+    QueueProcessed.attachSchema QueueProcessedSchema
 
     Meteor.methods
       getInQueue: (name) ->
@@ -78,13 +81,13 @@ Create queue object
           ticketNumber: nextTicketNumber
           connectionId: this.connection.id
           name: name
-          timeEnqueued: new Date Date.UTC()
+          timeEnqueued: moment.utc().toDate()
 
 Push onto the queue
 
         Queue.insert connection
 
-Update the queueMeta
+Increment nextTicketNumber (because we've pulled the current next ticket number)
 
         nextTicketNumber += 1
         criteria =
@@ -93,5 +96,12 @@ Update the queueMeta
           $set: nextTicketNumber: nextTicketNumber
 
         QueueMeta.update criteria, update
+
+If the current serving ticket is equal to the newest connection ticket number,
+then we should serve that ticket. That is, the latest connection in the queue is
+the only connection in the queue.
+
+        if connection.ticketNumber is queueMeta.currentlyServiceTicketNumber
+          QueueMethods.serveCurrentTicket()
 
         return connection

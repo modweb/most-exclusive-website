@@ -14,3 +14,5 @@ fezvrasta:bootstrap-material-design
 fortawesome:fontawesome
 aldeed:autoform
 aldeed:collection2
+momentjs:moment
+percolate:synced-cron
