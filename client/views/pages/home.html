@@ -2,8 +2,11 @@
   Currently serving ticket <b>#{{this.queueMeta.currentlyServingTicketNumber}}</b>.<br>
   There are <b>{{lineLength}}</b> people in line.<br>
   {{#if queueEntry}}
-    You are currently in line. Your ticket number is #{{queueEntry.ticketNumber}}.
+    You are currently in line. Your ticket number is #{{queueEntry.ticketNumber}}.<br>
+    {{#if isBeingServed}}
+      <h2>You're in!!!! You have until {{> dateUTC value=this.queueMeta.timeCurrentTicketExpires}}.</h2>
+    {{/if}}
   {{else}}
-    <button class='btn btn-success queueInLine'>Get in line</button>
+    <button class='btn btn-success queueInLine'>Take a ticket #{{queueEntry.nextTicketNumber}}</button>
   {{/if}}
 </template>

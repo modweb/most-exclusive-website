@@ -9,6 +9,10 @@ TODO: get postID
 
         queueMeta = QueueMeta.findOne()
 
+Save `currentlyServingTicketNumber` for potential updating if we bump the queue
+
+        currentlyServingTicketNumber = queueMeta.currentlyServingTicketNumber
+
 Update object, extended at various point for updating the QueueMeta
 
         update =
@@ -17,13 +21,14 @@ Update object, extended at various point for updating the QueueMeta
 
 If the currentlyServingTicketNumber is 0, skip attempting to archive the conneciton to ProcessedQueue
 
-        if queueMeta.currentlyServingTicketNumber isnt 0 and queueMeta.theOnlyConnectionAllowedIn isnt undefined
+        if queueMeta.theOnlyConnectionAllowedIn isnt undefined
 
 Return if there is no connection to pop or the timeCurrentTicketExpires hasn't expired
 
           console.log queueMeta
 
-          hasntExpired = queueMeta.timecurrentTicketExpires > moment.utc().toDate()
+          hasntExpired = queueMeta.timeCurrentTicketExpires > moment.utc().toDate()
+          console.log "#{queueMeta.timeCurrentTicketExpires} > #{moment.utc().toDate()} hasntExpired: #{hasntExpired}"
           return if hasntExpired
 
 Insert the processed connection into the ProcessedQueue
@@ -37,18 +42,20 @@ Insert the processed connection into the ProcessedQueue
 Remove the connection
 
           criteria =
-            connectionId: queueMeta.theOnlyConnectionAllowedIn.connection.id
+            connectionId: queueMeta.theOnlyConnectionAllowedIn.connectionId
 
+          console.log 'removeing connection from queue', criteria
           Queue.remove criteria
 
 Now serving the next ticket number
 
+          currentlyServingTicketNumber += 1
           _.extend update.$set,
-            currentlyServingTicketNumber: queueMeta.currentlyServingTicketNumber + 1
+            currentlyServingTicketNumber: currentlyServingTicketNumber
 
 Try to serve the next connection
 
-        criteria = ticketNumber: queueMeta.currentlyServingTicketNumber + 1
+        criteria = ticketNumber: currentlyServingTicketNumber
         nextConnection = Queue.findOne criteria
 
 Set the allowed connection and expireTime if one exists
@@ -57,6 +64,8 @@ If there is a nextConnection (i.e. someone waiting in line), then serve them.
 Otherwise clear out theOnlyConnectionAllowedIn.
 
         if nextConnection?
+
+          console.log 'attempting to serve next connection: '
           timeCurrentTicketExpires = moment.utc()
           timeCurrentTicketExpires.add 1, 'minutes'
           _.extend update.$set,

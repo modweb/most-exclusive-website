@@ -1,7 +1,19 @@
     Template.home.helpers
       lineLength: ->
-          this.queueMeta.nextTicketNumber - this.queueMeta.currentlyServingTicketNumber - 1
-      queueEntry: -> Session.get 'queueEntry'
+          this.queueMeta.nextTicketNumber - this.queueMeta.currentlyServingTicketNumber
+      queueEntry: ->
+        Session.get 'queueEntry'
+      isBeingServed: ->
+        queueEntry = Session.get 'queueEntry'
+        return if not queueEntry?
+
+Clear queueEntry if queueMeta.currentlyServingTicketNumber is > queueEntry.ticketNumber
+
+        if this.queueMeta.currentlyServingTicketNumber > queueEntry.ticketNumber
+          Session.set 'queueEntry', null
+
+        this.queueMeta.currentlyServingTicketNumber is queueEntry.ticketNumber and
+        this.queueMeta.timeCurrentTicketExpires > moment.utc().toDate()
 
     Template.home.events
       'click .queueInLine': (event) ->
