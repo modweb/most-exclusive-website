@@ -17,14 +17,34 @@
     <div class='row'>
       <div class='col-sm-12'>
         {{#if queueEntry}}
-          You are currently in line. Your ticket number is #{{queueEntry.ticketNumber}}.<br>
           {{#if isBeingServed}}
-            <h2>You're in!!!! You have until {{> dateUTC value=this.queueMeta.timeCurrentTicketExpires}}.</h2>
+            <h2>You're in! You have exclusive access until {{> dateUTC value=this.queueMeta.timeCurrentTicketExpires format='h:mm:ss A'}}.</h2>
+            {{#if hasPosted}}
+              <p>Thanks for posting. Now kick back and enjoy your remaining moments of exclusivity and this cat gif prize.</p>
+              <img src="http://thecatapi.com/api/images/get?format=src&type=gif&size=med" alt='cat gif prize'><img>
+            {{else}}
+              Post a message and receive a prize.
+              {{> quickForm schema=postFormSchema type='method' meteormethod='postMessage'}}
+            {{/if}}
+          {{else}}
+            <p>You are currently in line. Your ticket number is <b>#{{queueEntry.ticketNumber}}</b>.</p>
           {{/if}}
         {{else}}
           <button class='btn btn-lg btn-info queueInLine'>Take ticket #{{this.queueMeta.nextTicketNumber}}</button>
         {{/if}}
       </div>
     </div>
+  </div>
+  <div class='jumbotron'>
+    <h2>Most Recent Posts</h2>
+    {{#each posts}}
+      <div class='row'>
+        <div class='col-md-12'>
+          <h4>{{name}} - {{> dateUTC value=timeCreated format='MMM Do h:mm:ss A'}}</h4>
+          <h6>{{message}}</h6>
+          <hr>
+        </div>
+      </div>
+    {{/each}}
   </div>
 </template>

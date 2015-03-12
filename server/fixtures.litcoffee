@@ -8,6 +8,7 @@ but for now we'll keep it simple and only ever have 1 queue.
       queueMeta =
         currentlyServingTicketNumber: 1
         averageWaitTimeSeconds: 0
+        hasCurrentConnectionPosted: no
         timeCurrentTicketExpires: moment.utc().toDate()
         totalWaitTimeSeconds: 0
         totalVisitors: 0

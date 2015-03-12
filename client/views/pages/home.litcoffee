@@ -1,6 +1,10 @@
     Template.home.helpers
+      postFormSchema: -> PostFormSchema
+      hasPosted: -> this.queueMeta.hasCurrentConnectionPosted
       lineLength: ->
-          this.queueMeta.nextTicketNumber - this.queueMeta.currentlyServingTicketNumber
+        lineLength = this.queueMeta.nextTicketNumber - this.queueMeta.currentlyServingTicketNumber - 1
+        lineLength = 0 if lineLength < 0
+        return lineLength
       queueEntry: ->
         Session.get 'queueEntry'
       isBeingServed: ->

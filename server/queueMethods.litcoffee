@@ -25,10 +25,7 @@ If the currentlyServingTicketNumber is 0, skip attempting to archive the conneci
 
 Return if there is no connection to pop or the timeCurrentTicketExpires hasn't expired
 
-          console.log queueMeta
-
           hasntExpired = queueMeta.timeCurrentTicketExpires > moment.utc().toDate()
-          console.log "#{queueMeta.timeCurrentTicketExpires} > #{moment.utc().toDate()} hasntExpired: #{hasntExpired}"
           return if hasntExpired
 
 Insert the processed connection into the ProcessedQueue
@@ -46,11 +43,12 @@ Remove the connection
 
           Queue.remove criteria
 
-Now serving the next ticket number
+Now serving the next ticket number, and this ticket hasn't posted
 
           currentlyServingTicketNumber += 1
           _.extend update.$set,
             currentlyServingTicketNumber: currentlyServingTicketNumber
+            hasCurrentConnectionPosted: no
 
 Try to serve the next connection
 

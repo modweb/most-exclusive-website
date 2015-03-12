@@ -2,13 +2,10 @@
 
     @RouteControllers =
       queue: RouteController.extend
-        waitOn: -> Meteor.subscribe 'queueMeta'
-        data: -> queueMeta: QueueMeta.findOne()
-      exclusive: RouteController.extend
         waitOn: -> [
           Meteor.subscribe 'queueMeta'
-          Meteor.subscribe 'exclusive'
+          Meteor.subscribe 'top10Posts'
         ]
         data: ->
           queueMeta: QueueMeta.findOne()
-          exclusive: Posts.find().fetch()
+          posts: Posts.find().fetch()

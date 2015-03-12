@@ -19,6 +19,8 @@ ConnectionSchema has an ascending index on `ticketNumber`
       theOnlyConnectionAllowedIn:
         type: ConnectionSchema
         optional: yes
+      hasCurrentConnectionPosted:
+        type: Boolean
       currentlyServingTicketNumber:
         type: Number
       timeCurrentTicketExpires:
