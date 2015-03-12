@@ -1,5 +1,17 @@
+Autoform callback hooks
+
+    AutoForm.hooks
+      getInLine:
+        after:
+          method: (error, result) ->
+            if error?
+              console.log err
+            else
+              Session.set 'queueEntry', result
+
     Template.home.helpers
       postFormSchema: -> PostFormSchema
+      nameSchema: -> NameSchema
       hasPosted: -> this.queueMeta.hasCurrentConnectionPosted
       lineLength: ->
         lineLength = this.queueMeta.nextTicketNumber - this.queueMeta.currentlyServingTicketNumber - 1

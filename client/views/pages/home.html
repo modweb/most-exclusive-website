@@ -5,18 +5,14 @@
     <div class='row'>
       <div class='col-md-6 col-sm-12'>
         <p class='h2'>Currently serving ticket <b>#{{this.queueMeta.currentlyServingTicketNumber}}</b></p>
-      </div>
-      <div class='col-md-6 col-sm-12'>
         {{#if $eq lineLength 1}}
           <p class='h2'>There is <b>{{lineLength}}</b> person in line.</p>
         {{else}}
           <p class='h2'>There are <b>{{lineLength}}</b> people in line.</p>
         {{/if}}
       </div>
-    </div>
-    <div class='row'>
-      <div class='col-sm-12'>
-        {{#if queueEntry}}
+      {{#if queueEntry}}
+        <div class='col-sm-12'>
           {{#if isBeingServed}}
             <h2>You're in! You have exclusive access until {{> dateUTC value=this.queueMeta.timeCurrentTicketExpires format='h:mm:ss A'}}.</h2>
             {{#if hasPosted}}
@@ -29,10 +25,15 @@
           {{else}}
             <p>You are currently in line. Your ticket number is <b>#{{queueEntry.ticketNumber}}</b>.</p>
           {{/if}}
-        {{else}}
-          <button class='btn btn-lg btn-info queueInLine'>Take ticket #{{this.queueMeta.nextTicketNumber}}</button>
-        {{/if}}
-      </div>
+        </div>
+      {{else}}
+        <div class='col-md-6 col-sm-12'>
+          {{#autoForm id='getInLine' schema=nameSchema type='method' meteormethod='getInQueue' class='form-inline'}}
+            {{> afQuickField name='name' label-class="sr-only" afFieldInput-placeholder="schemaLabel" }}
+            <button type='submit' class='btn btn-lg btn-info'>Take ticket #{{this.queueMeta.nextTicketNumber}}</button>
+          {{/autoForm}}
+        </div>
+      {{/if}}
     </div>
   </div>
   <div class='jumbotron'>

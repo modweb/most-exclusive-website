@@ -2,9 +2,10 @@
 
 GetNameSchema is used to create the autoform to take a ticket.
 
-    NameSchema = new SimpleSchema
+    @NameSchema = new SimpleSchema
       name:
         type: String
+        label: 'Name'
         max: 100
 
 ConnectionSchema has an ascending index on `ticketNumber`
@@ -63,9 +64,13 @@ There is only ever one Queue Meta.
     QueueProcessed.attachSchema QueueProcessedSchema
 
     Meteor.methods
-      getInQueue: (name) ->
+      getInQueue: (doc) ->
 
         return if Meteor.isClient
+
+Validate doc
+
+        check doc, NameSchema
 
 Check that the connection is not already in the queue.
 
@@ -89,7 +94,7 @@ Create queue object
         connection =
           ticketNumber: nextTicketNumber
           connectionId: this.connection.id
-          name: name
+          name: doc.name
           timeEnqueued: moment.utc().toDate()
 
 Push onto the queue
