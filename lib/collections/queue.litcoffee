@@ -1,5 +1,12 @@
 # Queue Collection
 
+GetNameSchema is used to create the autoform to take a ticket.
+
+    NameSchema = new SimpleSchema
+      name:
+        type: String
+        max: 100
+
 ConnectionSchema has an ascending index on `ticketNumber`
 
     ConnectionSchema = new SimpleSchema

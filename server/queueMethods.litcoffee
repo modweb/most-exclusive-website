@@ -17,7 +17,6 @@ Update object, extended at various point for updating the QueueMeta
 
         update =
           $set: {}
-          $unset: {}
 
 If the currentlyServingTicketNumber is 0, skip attempting to archive the conneciton to ProcessedQueue
 
@@ -75,10 +74,11 @@ If there is no nextConnection, unset theOnlyConnectionAllowedIn.
 Note, fake data is filled in to pass schema, even though we're $unset'ing
 
         else
-          _.extend update.$unset,
-            theOnlyConnectionAllowedIn: ""
+          update.$unset = theOnlyConnectionAllowedIn: ""
 
         criteria = _id: queueMeta._id
+
+
         QueueMeta.update criteria, update
 
 TODO: keep it DRY; logic isn't exactly shared and want to keep update atomic to
