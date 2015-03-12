@@ -1,5 +1,14 @@
 Autoform callback hooks
 
+    updateClock = (timeCurrentTicketExpires) ->
+      clock = ($ '.countdown-clock').FlipClock
+        autoStart: yes
+        countdown: yes
+        clockFace: 'MinuteCounter'
+      time = Math.round (timeCurrentTicketExpires - new Date()) / 1000
+      time = 0 if time < 0
+      clock.setTime time
+      clock.start()
     AutoForm.hooks
       getInLine:
         after:
@@ -14,6 +23,10 @@ Autoform callback hooks
       nameSchema: -> NameSchema
       hasPosted: -> this.queueMeta.hasCurrentConnectionPosted
       lineLength: ->
+
+Hacks, should probably be using Tracker for this
+
+        updateClock this.queueMeta.timeCurrentTicketExpires
         lineLength = this.queueMeta.nextTicketNumber - this.queueMeta.currentlyServingTicketNumber - 1
         lineLength = 0 if lineLength < 0
         return lineLength
@@ -46,3 +59,6 @@ Call the meteor method to get queued.
             console.log err
           else
             Session.set 'queueEntry', result
+
+    Template.home.rendered = ->
+      updateClock this.data.queueMeta.timeCurrentTicketExpires

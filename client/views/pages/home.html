@@ -4,12 +4,15 @@
   <div class='jumbotron'>
     <div class='row'>
       <div class='col-md-6 col-sm-12'>
-        <p class='h2'>Currently serving ticket <b>#{{this.queueMeta.currentlyServingTicketNumber}}</b></p>
+        <p class='h2'>Next ticket in</p>
+        <div class='countdown-clock'></div>
         {{#if $eq lineLength 1}}
-          <p class='h2'>There is <b>{{lineLength}}</b> person in line.</p>
+          <p class='h2'>Currently serving ticket <b>#{{this.queueMeta.currentlyServingTicketNumber}}</b> with <b>{{lineLength}}</b> person in line.</p>
         {{else}}
-          <p class='h2'>There are <b>{{lineLength}}</b> people in line.</p>
+          <p class='h2'>Currently serving ticket <b>#{{this.queueMeta.currentlyServingTicketNumber}}</b> with <b>{{lineLength}}</b> people in line.</p>
         {{/if}}
+      </div>
+      <div class='col-md-6 col-sm-12'>
       </div>
       {{#if queueEntry}}
         <div class='col-sm-12'>
