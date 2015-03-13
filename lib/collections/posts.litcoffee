@@ -52,12 +52,16 @@ Get the queueMeta
 
 Check that the connection is theOnlyConnectionAllowedIn
 
-        isAllowedIn = this.connection.id is queueMeta.theOnlyConnectionAllowedIn.connectionId
+        isAllowedIn = this.connection.id is queueMeta.theOnlyConnectionAllowedIn?.connectionId
         throw new Meteor.Error 'no-access', "You're not allowed to do that until you're in." if not isAllowedIn
 
 Check that the connection hasn't already posted a message
 
         throw new Meteor.Error 'dup-post', "You're only allowed to post once." if queueMeta.hasCurrentConnectionPosted
+
+Check that the connection hasn't expired
+
+        throw new Meteor.Error 'expired', "You're time expired, post faster." if queueMeta.timeCurrentTicketExpires < moment.utc().toDate()
 
 Mark queueMeta as hasCurrentConnectionPosted
 
