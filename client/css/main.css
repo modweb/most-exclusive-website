@@ -8,3 +8,7 @@
 .break-word {
   word-wrap: break-word;
 }
+
+.flip-clock-wrapper {
+  margin: 0;
+}
