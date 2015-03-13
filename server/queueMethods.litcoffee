@@ -29,11 +29,14 @@ Return if there is no connection to pop or the timeCurrentTicketExpires hasn't e
 
 Insert the processed connection into the ProcessedQueue
 
-          processed =
-            connection: queueMeta.theOnlyConnectionAllowedIn
-            waitTimeSeconds: (moment.utc()).seconds() - (moment.utc queueMeta.theOnlyConnectionAllowedIn.timeEnqueued).seconds()
-
-          QueueProcessed.insert processed
+          try
+            waitTimeSeconds = moment.utc().diff (moment.utc queueMeta.theOnlyConnectionAllowedIn.timeEnqueued), 'seconds'
+            processed =
+              connection: queueMeta.theOnlyConnectionAllowedIn
+              waitTimeSeconds: waitTimeSeconds
+            QueueProcessed.insert processed
+          catch err
+            console.log err
 
 Remove the connection
 
@@ -44,10 +47,19 @@ Remove the connection
 
 Now serving the next ticket number, and this ticket hasn't posted
 
-          currentlyServingTicketNumber += 1
-          _.extend update.$set,
-            currentlyServingTicketNumber: currentlyServingTicketNumber
-            hasCurrentConnectionPosted: no
+
+          try
+            averageWaitTimeSeconds = Math.round (((currentlyServingTicketNumber - 1) * queueMeta.averageWaitTimeSeconds) + waitTimeSeconds) / currentlyServingTicketNumber
+            totalWaitTimeSeconds = queueMeta.totalWaitTimeSeconds + waitTimeSeconds
+            currentlyServingTicketNumber += 1
+            _.extend update.$set,
+              currentlyServingTicketNumber: currentlyServingTicketNumber
+              hasCurrentConnectionPosted: no
+              averageWaitTimeSeconds: averageWaitTimeSeconds
+              totalWaitTimeSeconds: totalWaitTimeSeconds
+          catch err
+            console.log err
+
 
 Try to serve the next connection
 
@@ -77,7 +89,6 @@ Note, fake data is filled in to pass schema, even though we're $unset'ing
           update.$unset = theOnlyConnectionAllowedIn: ""
 
         criteria = _id: queueMeta._id
-
 
         QueueMeta.update criteria, update
 
