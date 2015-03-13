@@ -47,10 +47,10 @@
   {{#each posts}}
     <div class='panel panel-default'>
       <div class='panel-heading'>
-        <p class='h3'><b>{{name}}</b> <span class='small'>{{> dateUTC value=timeCreated format='MMM Do h:mm:ss A'}}</span></p>
+        <p class='h3 break-word'><b>{{name}}</b> <span class='small'>{{> dateUTC value=timeCreated format='MMM Do h:mm:ss A'}}</span></p>
       </div>
       <div class='panel-body'>
-        <p class='h4'>{{message}}</p>
+        <p class='h4 break-word'>{{message}}</p>
       </div>
     </div>
   {{/each}}

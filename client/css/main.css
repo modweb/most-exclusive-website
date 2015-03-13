@@ -4,3 +4,7 @@
 .btn-default:not(.btn-link):not(.btn-flat) {
   color: black;
 }
+
+.break-word {
+  word-wrap: break-word;
+}
