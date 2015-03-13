@@ -22,6 +22,7 @@ Autoform callback hooks
       postFormSchema: -> PostFormSchema
       nameSchema: -> NameSchema
       hasPosted: -> this.queueMeta.hasCurrentConnectionPosted
+      gifUrl: -> Session.get 'gifUrl'
       lineLength: ->
 
 Hacks, should probably be using Tracker for this
@@ -36,13 +37,17 @@ Hacks, should probably be using Tracker for this
         queueEntry = Session.get 'queueEntry'
         return if not queueEntry?
 
+Get new gifUrl
+
+        Session.set 'gifUrl',"http://thecatapi.com/api/images/get?format=src&type=jpg&size=med&#{new Date().getTime()}"
+
 Clear queueEntry if queueMeta.currentlyServingTicketNumber is > queueEntry.ticketNumber
 
         if this.queueMeta.currentlyServingTicketNumber > queueEntry.ticketNumber
           Session.set 'queueEntry', null
 
         this.queueMeta.currentlyServingTicketNumber is queueEntry.ticketNumber and
-        this.queueMeta.timeCurrentTicketExpires > moment.utc().toDate()
+          this.queueMeta.timeCurrentTicketExpires > moment.utc().toDate()
 
     Template.home.events
       'click .queueInLine': (event) ->
