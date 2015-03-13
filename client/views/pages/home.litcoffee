@@ -8,7 +8,7 @@ Autoform callback hooks
       time = Math.round (timeCurrentTicketExpires - new Date()) / 1000
       time = 0 if time < 0
       clock.setTime time
-      clock.start()
+      clock.start() if time > 0
     AutoForm.hooks
       getInLine:
         after:

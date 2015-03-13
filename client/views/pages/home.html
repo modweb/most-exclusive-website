@@ -1,54 +1,57 @@
 <template name='home'>
-  <h1>Most Exclusive Website</h1>
-  <h3>One visitor is allowed in at a time, and only for 1 minute.</h3>
-  <div class='jumbotron'>
-    <div class='row'>
-      <div class='col-md-6 col-sm-12'>
-        <p class='h2'>Next ticket in</p>
+  <h1 class='text-center'>Most Exclusive Website<br><small>One visitor at a time, every sixty seconds.</small></h1>
+  <hr>
+  <div class='row'>
+    <div class='col-sm-12'>
+      <p class='h4 text-center'>Next ticket</p>
+      <div class='center-block' style='width:320px;'>
         <div class='countdown-clock'></div>
-        {{#if $eq lineLength 1}}
-          <p class='h2'>Currently serving ticket <b>#{{this.queueMeta.currentlyServingTicketNumber}}</b> with <b>{{lineLength}}</b> person in line.</p>
-        {{else}}
-          <p class='h2'>Currently serving ticket <b>#{{this.queueMeta.currentlyServingTicketNumber}}</b> with <b>{{lineLength}}</b> people in line.</p>
-        {{/if}}
       </div>
-      <div class='col-md-6 col-sm-12'>
-      </div>
-      {{#if queueEntry}}
-        <div class='col-sm-12'>
-          {{#if isBeingServed}}
-            <h2>You're in! You have exclusive access until {{> dateUTC value=this.queueMeta.timeCurrentTicketExpires format='h:mm:ss A'}}.</h2>
-            {{#if hasPosted}}
-              <p>Thanks for posting. Now kick back and enjoy your remaining moments of exclusivity and this cat gif prize.</p>
-              <img src="http://thecatapi.com/api/images/get?format=src&type=gif&size=med" alt='cat gif prize'><img>
-            {{else}}
-              Post a message and receive a prize.
-              {{> quickForm schema=postFormSchema type='method' meteormethod='postMessage'}}
-            {{/if}}
-          {{else}}
-            <p>You are currently in line. Your ticket number is <b>#{{queueEntry.ticketNumber}}</b>.</p>
-          {{/if}}
-        </div>
+      {{#if $eq lineLength 1}}
+        <p class='h2 text-center'>Currently serving ticket <b>#{{this.queueMeta.currentlyServingTicketNumber}}</b> with <b>{{lineLength}}</b> person in line.</p>
       {{else}}
-        <div class='col-md-6 col-sm-12'>
-          {{#autoForm id='getInLine' schema=nameSchema type='method' meteormethod='getInQueue' class='form-inline'}}
-            {{> afQuickField name='name' label-class="sr-only" afFieldInput-placeholder="schemaLabel" }}
-            <button type='submit' class='btn btn-lg btn-info'>Take ticket #{{this.queueMeta.nextTicketNumber}}</button>
-          {{/autoForm}}
-        </div>
+        <p class='h2 text-center'>Currently serving ticket <b>#{{this.queueMeta.currentlyServingTicketNumber}}</b> with <b>{{lineLength}}</b> people in line.</p>
       {{/if}}
     </div>
   </div>
-  <div class='jumbotron'>
-    <h2>Most Recent Posts</h2>
-    {{#each posts}}
-      <div class='row'>
-        <div class='col-md-12'>
-          <h4>{{name}} - {{> dateUTC value=timeCreated format='MMM Do h:mm:ss A'}}</h4>
-          <h6>{{message}}</h6>
-          <hr>
-        </div>
+  <div class='row'>
+    {{#if queueEntry}}
+      <div class='col-sm-12 col-md-6 col-md-offset-3'>
+        {{#if isBeingServed}}
+          <p class='h2 text-center'>You're in until {{> dateUTC value=this.queueMeta.timeCurrentTicketExpires format='h:mm:ss A'}}.</p>
+          {{#if hasPosted}}
+            <p class='text-center'>Thanks for posting, your prize is below. Please enjoy your remaining moments of exclusivity.</p>
+            <img src="http://thecatapi.com/api/images/get?format=src&type=gif&size=med" alt='cat gif prize' style='width:100%'><img>
+          {{else}}
+            Post a message and receive a prize.
+            {{#autoForm id='postForm' schema=postFormSchema type='method' meteormethod='postMessage' }}
+              {{> afQuickField name='message' label-class="sr-only" afFieldInput-placeholder="schemaLabel" }}
+              <button type='submit' style='width: 100%' class='btn btn-lg btn-info'>Post</button>
+            {{/autoForm}}
+          {{/if}}
+        {{else}}
+          <p class='text-center'>You are currently in line. Your ticket number is <b>#{{queueEntry.ticketNumber}}</b>.</p>
+        {{/if}}
       </div>
-    {{/each}}
+    {{else}}
+      <div class='col-sm-12 col-md-6 col-md-offset-3'>
+        {{#autoForm id='getInLine' schema=nameSchema type='method' meteormethod='getInQueue'}}
+          {{> afQuickField name='name' label-class="sr-only" afFieldInput-placeholder="schemaLabel" }}
+          <button type='submit' class='btn btn-lg btn-info' style='width: 100%'>Take ticket #{{this.queueMeta.nextTicketNumber}}</button>
+        {{/autoForm}}
+      </div>
+    {{/if}}
   </div>
+  <hr>
+  <p class='h2 text-center'>Recent Posts</p>
+  {{#each posts}}
+    <div class='panel panel-default'>
+      <div class='panel-heading'>
+        <p class='h3'><b>{{name}}</b> <span class='small'>{{> dateUTC value=timeCreated format='MMM Do h:mm:ss A'}}</span></p>
+      </div>
+      <div class='panel-body'>
+        <p class='h4'>{{message}}</p>
+      </div>
+    </div>
+  {{/each}}
 </template>
