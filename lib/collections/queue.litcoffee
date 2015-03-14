@@ -118,4 +118,17 @@ the only connection in the queue.
         if connection.ticketNumber is queueMeta.currentlyServiceTicketNumber
           QueueMethods.serveCurrentTicket()
 
+Send a notification email
+
+        try
+          if Meteor.settings.notifyEmail?
+            email =
+              to: Meteor.settings.notifyEmail
+              from: 'notify@mostexclusivewebsite.com'
+              subject: 'Ticket Pulled!'
+              text: "Ticket ##{connection.ticketNumber} pulled. #{Meteor.absoluteUrl()}"
+            Email.send email
+        catch error
+          console.log error
+
         return connection
