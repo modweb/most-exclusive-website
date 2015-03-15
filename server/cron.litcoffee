@@ -1,6 +1,7 @@
 # Cron jobs
 
     SyncedCron.options.log = no
+    SyncedCron.options.collectionTTL = 3600 #1 hour
 
     SyncedCron.add
       name: 'Pop and serve next ticket'
