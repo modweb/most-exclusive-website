@@ -9,49 +9,53 @@ TODO: get postID
 
         queueMeta = QueueMeta.findOne()
 
-Save `currentlyServingTicketNumber` for potential updating if we bump the queue
-
-        currentlyServingTicketNumber = queueMeta.currentlyServingTicketNumber
-
-Update object, extended at various point for updating the QueueMeta
+Update object, extended at various point for updating the QueueMeta in one swoop
 
         update =
           $set: {}
 
-If the currentlyServingTicketNumber is 0, skip attempting to archive the conneciton to ProcessedQueue
+If `theOnlyConnectionAllowedIn` is set to something, check if the connection
+has expired and process the connection if it has.
 
         if queueMeta.theOnlyConnectionAllowedIn isnt undefined
 
-Return if there is no connection to pop or the timeCurrentTicketExpires hasn't expired
+Return if timeCurrentTicketExpires is in the future (hasn't expired)
 
           hasntExpired = queueMeta.timeCurrentTicketExpires > moment.utc().toDate()
           return if hasntExpired
 
+Okay then, the current connection has expired, time to get bumped.
 Insert the processed connection into the ProcessedQueue
 
           try
+
+Calculate how long the connection had to wait in line.
+
             waitTimeSeconds = moment.utc().diff (moment.utc queueMeta.theOnlyConnectionAllowedIn.timeEnqueued), 'seconds'
+
+Make the processed object.
+
             processed =
               connection: queueMeta.theOnlyConnectionAllowedIn
               waitTimeSeconds: waitTimeSeconds
+
+Insert the processed connection to `QueueProcessed`
+
             QueueProcessed.insert processed
           catch err
             console.log err
 
-Remove the connection
+Remove the connection from the `Queue`
 
-          criteria =
-            connectionId: queueMeta.theOnlyConnectionAllowedIn.connectionId
-
+          criteria = connectionId: queueMeta.theOnlyConnectionAllowedIn.connectionId
           Queue.remove criteria
 
-Now serving the next ticket number, and this ticket hasn't posted
-
+Update `QueueMeta` stats and ticket number.
 
           try
-            averageWaitTimeSeconds = Math.round (((currentlyServingTicketNumber - 1) * queueMeta.averageWaitTimeSeconds) + waitTimeSeconds) / currentlyServingTicketNumber
+            averageWaitTimeSeconds = Math.round (((queueMeta.currentlyServingTicketNumber - 1) * queueMeta.averageWaitTimeSeconds) + waitTimeSeconds) / queueMeta.currentlyServingTicketNumber
             totalWaitTimeSeconds = queueMeta.totalWaitTimeSeconds + waitTimeSeconds
-            currentlyServingTicketNumber += 1
+            currentlyServingTicketNumber = queueMeta.currentlyServingTicketNumber + 1
             _.extend update.$set,
               currentlyServingTicketNumber: currentlyServingTicketNumber
               hasCurrentConnectionPosted: no
@@ -60,11 +64,9 @@ Now serving the next ticket number, and this ticket hasn't posted
           catch err
             console.log err
 
+Lookup the lowest ticket # waiting in the `Queue`
 
-Try to serve the next connection
-
-        criteria = ticketNumber: currentlyServingTicketNumber
-        nextConnection = Queue.findOne criteria
+        nextConnection = Queue.findOne {}, $sort: ticketNumber: 1
 
 Set the allowed connection and expireTime if one exists
 
@@ -77,10 +79,7 @@ Otherwise clear out theOnlyConnectionAllowedIn.
           _.extend update.$set,
             theOnlyConnectionAllowedIn: nextConnection
             timeCurrentTicketExpires: timeCurrentTicketExpires.toDate()
-
-Set up timeout function to pop queue
-
-          delayPop = Meteor.setTimeout QueueMethods.popAndServeNextTicket, 1000
+            currentlyServingTicketNumber: nextConnection.ticketNumber
 
 If there is no nextConnection, unset theOnlyConnectionAllowedIn.
 Note, fake data is filled in to pass schema, even though we're $unset'ing
@@ -90,37 +89,15 @@ Note, fake data is filled in to pass schema, even though we're $unset'ing
 
         criteria = _id: queueMeta._id
 
-        QueueMeta.update criteria, update
+Delete `update.$set` if it's empty
+
+        if _.isEmpty update.$set
+          delete update.$set
+
+If `update` isn't empty, update!
+
+        if not _.isEmpty update
+          QueueMeta.update criteria, update
 
 TODO: keep it DRY; logic isn't exactly shared and want to keep update atomic to
 avoid extraneous DDP messages.
-
-      serveCurrentTicket: ->
-
-Lookup the queue (only one for now)
-
-        queueMeta = QueueMeta.findOne()
-
-Get the next connection.
-
-        criteria =
-          ticketNumber: queueMeta.currentlyServingTicketNumber
-
-        nextConnection = Queue.findOne criteria
-
-Set the allowed connection and expireTime if one exists
-
-        if nextConnection?
-          timeCurrentTicketExpires = moment.utc()
-          timeCurrentTicketExpires.add 1, 'minutes'
-          update =
-            $set:
-              theOnlyConnectionAllowedIn: nextConnection
-              timeCurrentTicketExpires: timeCurrentTicketExpires.toDate()
-          criteria = _id: queueMeta._id
-
-Set up timeout function to pop queue
-
-          delayPop = Meteor.setTimeout QueueMethods.popAndServeNextTicket, 1000
-
-          QueueMeta.update criteria, update

@@ -111,13 +111,6 @@ Increment nextTicketNumber (because we've pulled the current next ticket number)
 
         QueueMeta.update criteria, update
 
-If the current serving ticket is equal to the newest connection ticket number,
-then we should serve that ticket. That is, the latest connection in the queue is
-the only connection in the queue.
-
-        if connection.ticketNumber is queueMeta.currentlyServiceTicketNumber
-          QueueMethods.serveCurrentTicket()
-
 Send a notification email
 
         try
