@@ -4,7 +4,7 @@
       queue: RouteController.extend
         waitOn: -> [
           Meteor.subscribe 'queueMeta'
-          Meteor.subscribe 'top10Posts'
+          Meteor.subscribe 'topPosts'
         ]
         data: ->
           queueMeta: QueueMeta.findOne()

@@ -1,0 +1,29 @@
+<template name='in'>
+  <div class='row'>
+    <div class='col-sm-12 col-md-6 col-md-offset-3'>
+      <p class='h2 text-center'>You're in until {{> dateUTC value=this.queueMeta.timeCurrentTicketExpires format='h:mm:ss A'}}.</p>
+      {{#if hasPosted}}
+        <p class='text-center'>Thanks for posting, your prize is below.<br>Please enjoy your remaining moments of exclusivity.</p>
+        <img src={{gifUrl}} alt='cat gif prize' style='width:100%'><img>
+      {{else}}
+        Post a message and receive a prize.
+        {{#autoForm id='postForm' schema=postFormSchema type='method' meteormethod='postMessage' }}
+          {{> afQuickField name='message' label-class="sr-only" afFieldInput-placeholder="schemaLabel" }}
+          <button type='submit' style='width: 100%' class='btn btn-lg btn-info'>Post</button>
+        {{/autoForm}}
+      {{/if}}
+    </div>
+  </div>
+  <hr>
+  <p class='h2 text-center'>100 Most Recent Posts</p>
+  {{#each posts}}
+    <div class='panel panel-default'>
+      <div class='panel-heading'>
+        <p class='h3 break-word'><b>{{name}}</b> <span class='small'>{{> dateUTC value=timeCreated format='MMM Do h:mm:ss A'}}</span></p>
+      </div>
+      <div class='panel-body'>
+        <p class='h4 break-word'>{{message}}</p>
+      </div>
+    </div>
+  {{/each}}
+</template>
