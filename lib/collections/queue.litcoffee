@@ -111,16 +111,18 @@ Increment nextTicketNumber (because we've pulled the current next ticket number)
 
         QueueMeta.update criteria, update
 
-Send a notification email
+Send a notification email, unblock
+
+        this.unblock()
 
         try
-          if Meteor.settings.notifyEmail?
-            email =
+          if Meteor.settings.notifyEmail? and Meteor.settings.mailgunOptions?
+            Mailguns = new Mailgun Meteor.settings.mailgunOptions
+            Mailguns.send
               to: Meteor.settings.notifyEmail
               from: 'notify@mostexclusivewebsite.com'
               subject: 'Ticket Pulled!'
-              text: "Ticket ##{connection.ticketNumber} pulled. #{Meteor.absoluteUrl()}"
-            Email.send email
+              text: "Ticket ##{connection.ticketNumber}. #{Meteor.absoluteUrl()}"
         catch error
           console.log error
 

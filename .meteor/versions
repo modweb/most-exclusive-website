@@ -20,6 +20,7 @@ fastclick@1.0.3
 fezvrasta:bootstrap-material-design@0.3.0
 fortawesome:fontawesome@4.2.0_2
 geojson-utils@1.0.3
+gfk:mailgun-api@1.1.0
 html-tools@1.0.4
 htmljs@1.0.4
 http@1.1.0
