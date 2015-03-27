@@ -101,3 +101,13 @@ If `update` isn't empty, update!
 
 TODO: keep it DRY; logic isn't exactly shared and want to keep update atomic to
 avoid extraneous DDP messages.
+
+## Disconnect, remove from queue
+
+    Meteor.onConnection (connection) ->
+      connection.onClose ->
+
+Remove the connection from the `Queue`
+
+          criteria = connectionId: connection.id
+          Queue.remove criteria
