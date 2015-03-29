@@ -18,4 +18,10 @@
   {{else}}
     {{> waiting}}
   {{/if}}
+  <div class='row'>
+    <div class='col-sm-12'>
+      <p class='h4 text-center'><b>{{totalWaitTime}}</b> spent waiting to be exclusive.</p>
+      <p class='h4 text-center'>Average wait time is <b>{{averageWaitTime}}</b>.</p>
+    </div>
+  </div>
 </template>

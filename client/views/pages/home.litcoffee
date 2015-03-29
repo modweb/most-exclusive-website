@@ -17,6 +17,12 @@ Autoform callback hooks
         return lineLength
       queueEntry: ->
         Session.get 'queueEntry'
+      totalWaitTime: ->
+        hours = (this.queueMeta.totalWaitTimeSeconds / 3600).toFixed 4
+        "#{hours} hours"
+      averageWaitTime: ->
+        duration = moment.duration this.queueMeta.averageWaitTimeSeconds, 'seconds'
+        duration.humanize()
       isBeingServed: ->
         queueEntry = Session.get 'queueEntry'
         return if not queueEntry?
