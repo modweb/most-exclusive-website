@@ -20,6 +20,7 @@ Hacks, should probably be using Tracker for this
         return lineLength
       queueEntry: ->
         Session.get 'queueEntry'
+      html: -> this.queueMeta.html
       isBeingServed: ->
         queueEntry = Session.get 'queueEntry'
         return if not queueEntry?

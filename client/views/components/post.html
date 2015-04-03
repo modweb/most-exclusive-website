@@ -1,0 +1,13 @@
+<template name='post'>
+  <div class='panel panel-default'>
+    <div class='panel-heading'>
+      <p class='h3 break-word'><b>{{name}}</b> <span class='small'>{{> dateUTC value=timeCreated format='MMM Do h:mm:ss A'}}</span></p>
+    </div>
+    <div class='panel-body'>
+      <p class='h4 break-word'>{{message}}</p>
+      {{#if link}}
+        <a href='{{link}}' target='_blank'>{{link}}</a>
+      {{/if}}
+    </div>
+  </div>
+</template>

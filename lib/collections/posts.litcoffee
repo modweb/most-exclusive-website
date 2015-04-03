@@ -9,6 +9,10 @@ in the reset of the data.
         max: 200
         autoform:
           rows: 3
+      link:
+        type: String
+        regEx: SimpleSchema.RegEx.Url
+        optional: yes
 
     PostSchema = new SimpleSchema
       name:
@@ -16,6 +20,13 @@ in the reset of the data.
       message:
         type: String
         max: 200
+      link:
+        type: String
+        regEx: SimpleSchema.RegEx.Url
+        optional: yes
+      html:
+        type: String
+        optional: yes
       timeCreated:
         type: Date
         autoValue: ->
@@ -68,14 +79,32 @@ Mark queueMeta as hasCurrentConnectionPosted
         criteria = _id: queueMeta._id
         update = $set: hasCurrentConnectionPosted: yes
 
-        QueueMeta.update criteria, update
+Try to get noembed content
+
+        callback = (error, result) ->
+          console.log error if error?
+          if not error? and result?.data?.html? then html = result.data.html
 
 Post message
 
-        post =
-          name: queueMeta.theOnlyConnectionAllowedIn.name
-          message: doc.message
-          connectionId: queueMeta.theOnlyConnectionAllowedIn.connectionId
-          ticketNumber: queueMeta.theOnlyConnectionAllowedIn.ticketNumber
+          post =
+            name: queueMeta.theOnlyConnectionAllowedIn.name
+            message: doc.message
+            link: doc.link
+            connectionId: queueMeta.theOnlyConnectionAllowedIn.connectionId
+            ticketNumber: queueMeta.theOnlyConnectionAllowedIn.ticketNumber
 
-        Posts.insert post
+          if html?
+            _.extend post, html: html
+            _.extend update.$set, html: html
+          else
+            _.extend update, $unset: html: 'unset'
+
+          QueueMeta.update criteria, update
+          Posts.insert post
+
+        if doc.link?
+          getUrl = "http://noembed.com/embed?url=#{doc.link}&autoplay=1&auto_play=1"
+          HTTP.get getUrl, callback
+        else
+          callback()

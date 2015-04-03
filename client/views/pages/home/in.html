@@ -8,7 +8,8 @@
       {{else}}
         Post a message and receive a prize.
         {{#autoForm id='postForm' schema=postFormSchema type='method' meteormethod='postMessage' }}
-          {{> afQuickField name='message' label-class="sr-only" afFieldInput-placeholder="schemaLabel" }}
+          {{> afQuickField name='link' label-class='sr-only' afFieldInput-placeholder='schemaLabel' }}
+          {{> afQuickField name='message' label-class='sr-only' afFieldInput-placeholder='content link (optional)' }}
           <button type='submit' style='width: 100%' class='btn btn-lg btn-info'>Post</button>
         {{/autoForm}}
       {{/if}}
@@ -16,13 +17,6 @@
   </div>
   <hr>
   {{#each posts}}
-    <div class='panel panel-default'>
-      <div class='panel-heading'>
-        <p class='h3 break-word'><b>{{name}}</b> <span class='small'>{{> dateUTC value=timeCreated format='MMM Do h:mm:ss A'}}</span></p>
-      </div>
-      <div class='panel-body'>
-        <p class='h4 break-word'>{{message}}</p>
-      </div>
-    </div>
+    {{> post}}
   {{/each}}
 </template>
