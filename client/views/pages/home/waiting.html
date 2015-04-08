@@ -1,14 +1,5 @@
 <template name='waiting'>
   <div class='row'>
-    <div class='col-sm-12'>
-      {{#if $eq lineLength 1}}
-        <p class='h2 text-center'>Currently serving ticket <b>#{{this.queueMeta.currentlyServingTicketNumber}}</b> with <b>{{lineLength}}</b> person in line.</p>
-      {{else}}
-        <p class='h2 text-center'>Currently serving ticket <b>#{{this.queueMeta.currentlyServingTicketNumber}}</b> with <b>{{lineLength}}</b> people in line.</p>
-      {{/if}}
-    </div>
-  </div>
-  <div class='row'>
     {{#if queueEntry}}
       <div class='col-sm-12 col-md-6 col-md-offset-3'>
         <p class='text-center'>You are currently in line. Your ticket number is <b>#{{queueEntry.ticketNumber}}</b>.</p>
