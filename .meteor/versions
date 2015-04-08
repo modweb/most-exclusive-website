@@ -49,7 +49,7 @@ minifiers@1.1.5
 minimongo@1.0.8
 mobile-status-bar@1.0.3
 modweb:flipclock@0.0.1
-momentjs:moment@2.9.0
+momentjs:moment@2.10.0
 mongo@1.1.0
 mongo-livedata@1.0.8
 natestrauser:connection-banner@0.4.3
