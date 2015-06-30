@@ -7,7 +7,13 @@
           Meteor.subscribe 'topPosts'
         ]
         data: ->
-          queueMeta: QueueMeta.findOne()
-          posts: Posts.find({}, {sort: ticketNumber: -1}).fetch()
-
-Posts.find({}, {sort: ticketNumber: -1}).fetch()
+          status = Meteor.status()
+          if Session.equals('connectionId', null) and Meteor.default_connection._lastSessionId?
+            Session.set 'connectionId', Meteor.default_connection._lastSessionId
+          else if Meteor.default_connection._lastSessionId?
+            oldConnectionId = Session.get 'connectionId'
+            Meteor.call 'updateConnectionId', oldConnectionId if oldConnectionId isnt Meteor.default_connection._lastSessionId
+            Session.set 'connectionId', Meteor.default_connection._lastSessionId
+          result =
+            queueMeta: QueueMeta.findOne()
+            posts: _.sortBy Posts.find().fetch(), (post) -> -post.ticketNumber

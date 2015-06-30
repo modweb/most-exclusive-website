@@ -69,7 +69,7 @@ There is only ever one Queue Meta.
     Meteor.methods
       getInQueue: (doc) ->
 
-        return if Meteor.isClient
+        return if this.isSimulation
 
 Validate doc
 
@@ -130,3 +130,25 @@ Send a notification email, unblock
           console.log error
 
         return connection
+
+      updateConnectionId: (oldConnectionId) ->
+        return if this.isSimulation
+        newConnectionId = this.connection.id
+        this.unblock()
+        criteria =
+          connectionId: oldConnectionId
+        action =
+          $set:
+            connectionId: newConnectionId
+
+        Queue.update criteria, action
+
+Update QueueMeta (TODO: way around lots of failed updates?)
+
+        criteria =
+          'theOnlyConnectionAllowedIn.connectionId': oldConnectionId
+        action =
+          $set:
+            'theOnlyConnectionAllowedIn.connectionId': newConnectionId
+
+        QueueMeta.update criteria, action
