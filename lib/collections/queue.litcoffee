@@ -133,14 +133,16 @@ Send a notification email, unblock
 
       updateConnectionId: (oldConnectionId) ->
         return if this.isSimulation
-        newConnectionId = this.connection.id
         this.unblock()
+        newConnectionId = this.connection.id
+        return if not newConnectionId? or not oldConnectionId?
         criteria =
           connectionId: oldConnectionId
         action =
           $set:
             connectionId: newConnectionId
 
+        console.log 'update queue', criteria, action
         Queue.update criteria, action
 
 Update QueueMeta (TODO: way around lots of failed updates?)
@@ -151,4 +153,5 @@ Update QueueMeta (TODO: way around lots of failed updates?)
           $set:
             'theOnlyConnectionAllowedIn.connectionId': newConnectionId
 
+        console.log 'update queuemeta', criteria, action
         QueueMeta.update criteria, action
