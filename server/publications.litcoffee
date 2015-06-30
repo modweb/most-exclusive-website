@@ -1,10 +1,12 @@
 # Publications
 
     Meteor.publish 'queueMeta', ->
-      QueueMeta.find()
-    Meteor.publish 'topPosts', ->
-      queueMeta = QueueMeta.findOne()
-      if this.connection.id is queueMeta.theOnlyConnectionAllowedIn?.connectionId
-        Posts.find {}, {sort: {ticketNumber: -1}, limit: 100 }
+      if Meteor.settings.queueMetaId?
+        criteria =
+          _id: Meteor.settings.queueMetaId
       else
-        Posts.find {}, {sort: {ticketNumber: -1}, limit: 100 }
+        criteria = {}
+      QueueMeta.find(criteria)
+
+    Meteor.publish 'topPosts', ->
+      Posts.find {}, {sort: {ticketNumber: -1}, limit: 10 }

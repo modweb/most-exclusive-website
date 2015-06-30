@@ -6,4 +6,3 @@
 
     Template.in.rendered = ->
       $('body').css 'background-color', '#b2ebf2'
-      Meteor.subscribe 'topPosts'

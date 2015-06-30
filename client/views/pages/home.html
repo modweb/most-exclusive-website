@@ -23,14 +23,14 @@
       {{/if}}
     </div>
   </div>
-  <div class='row'>
-    <div class='text-center'>{{> shareit}}</div>
-  </div>
   {{#if isBeingServed}}
     {{> in}}
   {{else}}
     {{> waiting}}
   {{/if}}
+  <div class='row'>
+    <div class='text-center h3'>Top posts are hidden because Reddit is crushing me...</div>
+  </div>
   <div class='row'>
     <div class='col-sm-12'>
       <p class='h4 text-center'><b>{{totalWaitTime}}</b> spent waiting to be exclusive.</p>

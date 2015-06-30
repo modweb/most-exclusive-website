@@ -66,7 +66,7 @@ Update `QueueMeta` stats and ticket number.
 
 Lookup the lowest ticket # waiting in the `Queue`
 
-        nextConnection = Queue.findOne {}, $sort: ticketNumber: 1
+        nextConnection = Queue.findOne {}, $sort: [ 'ticketNumber': 'asc' ]
 
 Set the allowed connection and expireTime if one exists
 

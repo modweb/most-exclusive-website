@@ -21,5 +21,4 @@ meteorhacks:kadira
 reywood:iron-router-ga
 gfk:mailgun-api
 http
-appcache
-joshowens:shareit
+meteorhacks:cluster

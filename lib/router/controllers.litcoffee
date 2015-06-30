@@ -9,3 +9,5 @@
         data: ->
           queueMeta: QueueMeta.findOne()
           posts: Posts.find({}, {sort: ticketNumber: -1}).fetch()
+
+Posts.find({}, {sort: ticketNumber: -1}).fetch()

@@ -4,4 +4,3 @@
       @route 'home',
         path: '/'
         controller: RouteControllers.queue
-      @route 'about'
