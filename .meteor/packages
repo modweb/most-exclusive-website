@@ -23,5 +23,4 @@ gfk:mailgun-api
 http
 meteorhacks:cluster
 meteorhacks:sikka
-appcache
 spiderable

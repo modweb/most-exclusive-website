@@ -3,8 +3,8 @@
     <h1 class='text-center'>Most Exclusive Website<br><small>It's all yours, relish in the glory of exclusivity.</small></h1>
   {{else}}
     <h1 class='text-center'>Most Exclusive Website<br><small>One visitor at a time, every sixty seconds. Get your ticket.</small></h1>
-
     <hr>
+    <div class='text-center h4'><a data-toggle="modal" data-target="#feedbackModal">Feedback? Advertise? Say hi?</a></div>
   {{/if}}
   <div class='row'>
     <div class='col-sm-12'>
@@ -38,4 +38,22 @@
       <p class='h4 text-center'>Created for the lulz by <b><a href='https://github.com/jfols'>jfols</a></b></p>
     </div>
   </div>
+
+<!-- Modal -->
+<div class="modal fade" id="feedbackModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title" id="myModalLabel">Let's get in touch!</h4>
+        <hr>
+      </div>
+      <div class="modal-body">
+        {{> feedback}}
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+      </div>
+    </div>
+  </div>
+</div>
 </template>

@@ -55,6 +55,10 @@ Call the meteor method to get queued.
           else
             Session.set 'queueEntry', result
 
+      'click .submit-feedback': (event) ->
+        console.log 'clicked!'
+        $('#feedbackModal').modal 'hide'
+
     Template.home.rendered = ->
       Tracker.autorun ->
         updateClock QueueMeta.findOne()?.timeCurrentTicketExpires

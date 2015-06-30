@@ -142,7 +142,6 @@ Send a notification email, unblock
           $set:
             connectionId: newConnectionId
 
-        console.log 'update queue', criteria, action
         Queue.update criteria, action
 
 Update QueueMeta (TODO: way around lots of failed updates?)
