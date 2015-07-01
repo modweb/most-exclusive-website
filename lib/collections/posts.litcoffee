@@ -104,7 +104,7 @@ Post message
           Posts.insert post
 
         if doc.link?
-          getUrl = "http://noembed.com/embed?url=#{doc.link}&autoplay=1&auto_play=1"
+          getUrl = "http://noembed.com/embed?url=#{doc.link}"
           HTTP.get getUrl, callback
         else
           callback()
