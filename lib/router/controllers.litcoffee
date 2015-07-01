@@ -13,6 +13,10 @@
           else if Meteor.default_connection._lastSessionId?
             oldConnectionId = Session.get 'connectionId'
             Meteor.call 'updateConnectionId', oldConnectionId if oldConnectionId isnt Meteor.default_connection._lastSessionId
+            queueEntry = Session.get 'queueEntry'
+            if queueEntry?
+              queueEntry.connectionId = Meteor.default_connection._lastSessionId
+              Session.set 'queueEntry', queueEntry
             Session.set 'connectionId', Meteor.default_connection._lastSessionId
           result =
             queueMeta: QueueMeta.findOne()

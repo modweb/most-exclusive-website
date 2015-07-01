@@ -100,6 +100,7 @@ If `update` isn't empty, update!
         if not _.isEmpty update
           QueueMeta.update criteria, update
 
+
 TODO: keep it DRY; logic isn't exactly shared and want to keep update atomic to
 avoid extraneous DDP messages.
 
@@ -110,5 +111,5 @@ avoid extraneous DDP messages.
 
 Remove the connection from the `Queue`
 
-          criteria = connectionId: connection.id
-          Queue.remove criteria
+        criteria = connectionId: connection.id
+        Queue.remove criteria

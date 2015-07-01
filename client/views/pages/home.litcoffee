@@ -20,11 +20,11 @@ Autoform callback hooks
       totalWaitTime: ->
         minutes = (this.queueMeta.totalWaitTimeSeconds / 60).toFixed 2
         "#{minutes} minutes"
+      nameAllowedIn: ->
+        return this.queueMeta?.theOnlyConnectionAllowedIn?.name
       isBeingServed: ->
         queueEntry = Session.get 'queueEntry'
         return if not queueEntry?
-      nameAllowedIn: ->
-        return this.queueMeta?.theOnlyConnectionAllowedIn?.name
 
 Get new gifUrl
 
