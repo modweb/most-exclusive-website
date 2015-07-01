@@ -152,5 +152,4 @@ Update QueueMeta (TODO: way around lots of failed updates?)
           $set:
             'theOnlyConnectionAllowedIn.connectionId': newConnectionId
 
-        console.log 'update queuemeta', criteria, action
         QueueMeta.update criteria, action

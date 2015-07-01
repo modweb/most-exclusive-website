@@ -53,13 +53,11 @@ Remove the connection from the `Queue`
 Update `QueueMeta` stats and ticket number.
 
           try
-            averageWaitTimeSeconds = Math.round (((queueMeta.currentlyServingTicketNumber - 1) * queueMeta.averageWaitTimeSeconds) + waitTimeSeconds) / queueMeta.currentlyServingTicketNumber
             totalWaitTimeSeconds = queueMeta.totalWaitTimeSeconds + waitTimeSeconds
             currentlyServingTicketNumber = queueMeta.currentlyServingTicketNumber + 1
             _.extend update.$set,
               currentlyServingTicketNumber: currentlyServingTicketNumber
               hasCurrentConnectionPosted: no
-              averageWaitTimeSeconds: averageWaitTimeSeconds
               totalWaitTimeSeconds: totalWaitTimeSeconds
           catch err
             console.log err

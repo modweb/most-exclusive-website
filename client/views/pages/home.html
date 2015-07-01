@@ -4,7 +4,8 @@
   {{else}}
     <h1 class='text-center'>Most Exclusive Website<br><small>One visitor at a time, every sixty seconds. Get your ticket.</small></h1>
     <hr>
-    <div class='text-center h4'><a data-toggle="modal" data-target="#feedbackModal">Feedback? Advertise? Say hi?</a></div>
+    <div class='text-center h4'><button class='btn btn-raised btn-default' data-toggle="modal" data-target="#feedbackModal">Feedback? Advertise? Say hi?</button></div>
+    <hr>
   {{/if}}
   <div class='row'>
     <div class='col-sm-12'>
@@ -29,13 +30,9 @@
     {{> waiting}}
   {{/if}}
   <div class='row'>
-    <div class='text-center h3'>Top posts are hidden because Reddit is crushing me...</div>
-  </div>
-  <div class='row'>
     <div class='col-sm-12'>
-      <p class='h4 text-center'><b>{{totalWaitTime}}</b> spent waiting to be exclusive.</p>
-      <p class='h4 text-center'>Average wait time is <b>{{averageWaitTime}}</b>.</p>
-      <p class='h4 text-center'>Created for the lulz by <b><a href='https://github.com/jfols'>jfols</a></b></p>
+      <p class='h4 text-center'><b>{{totalWaitTime}}</b> were spent waiting to be exclusive.</p>
+      <p class='h4 text-center'>Created by <b><a href='https://github.com/jfols'>jfols</a></b> with <i class="fa fa-heart"></i> in Ohio</p>
     </div>
   </div>
 

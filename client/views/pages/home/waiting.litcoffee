@@ -18,6 +18,8 @@ Hacks, should probably be using Tracker for this
         lineLength = this.queueMeta.nextTicketNumber - this.queueMeta.currentlyServingTicketNumber - 1
         lineLength = 0 if lineLength < 0
         return lineLength
+      numberOfTicketsBeforeYou: ->
+        (Session.get 'queueEntry')?.ticketNumber - this.queueMeta.currentlyServingTicketNumber
       queueEntry: ->
         Session.get 'queueEntry'
       html: -> this.queueMeta.html
