@@ -100,18 +100,6 @@ If `update` isn't empty, update!
         if not _.isEmpty update
           QueueMeta.update criteria, update
 
-If previousConnection connection didn't post, post for her
-
-        if previousConnectionDidntPosted
-          post =
-            name: previousConnection.name
-            message: 'Had nothing to say...'
-            connectionId: previousConnection.connectionId
-            ticketNumber: previousConnection.ticketNumber
-
-          Posts.insert post
-
-
 TODO: keep it DRY; logic isn't exactly shared and want to keep update atomic to
 avoid extraneous DDP messages.
 

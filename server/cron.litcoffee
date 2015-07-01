@@ -5,7 +5,7 @@
 
     SyncedCron.add
       name: 'Pop and serve next ticket'
-      schedule: (parser) -> parser.text 'every 1 seconds'
+      schedule: (parser) -> parser.text 'every 2 seconds'
       job: -> QueueMethods.popAndServeNextTicket()
 
 Start Jobs
