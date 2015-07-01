@@ -23,6 +23,8 @@ Autoform callback hooks
       isBeingServed: ->
         queueEntry = Session.get 'queueEntry'
         return if not queueEntry?
+      nameAllowedIn: ->
+        return this.queueMeta?.theOnlyConnectionAllowedIn?.name
 
 Get new gifUrl
 
