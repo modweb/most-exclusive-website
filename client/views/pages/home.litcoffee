@@ -35,8 +35,7 @@ Clear queueEntry if queueMeta.currentlyServingTicketNumber is > queueEntry.ticke
         if this.queueMeta.currentlyServingTicketNumber > queueEntry.ticketNumber
           Session.set 'queueEntry', null
 
-        this.queueMeta.currentlyServingTicketNumber is queueEntry.ticketNumber and
-          this.queueMeta.timeCurrentTicketExpires > moment.utc().toDate()
+        result = this.queueMeta.currentlyServingTicketNumber is queueEntry.ticketNumber
 
     Template.home.events
       'click .queueInLine': (event) ->
