@@ -37,5 +37,5 @@ Send email
           Mailguns.send
             to: Meteor.settings.feedbackEmail
             from: 'feedback@mostexclusivewebsite.com'
-            subject: "Feedback from #{doc.email}"
+            subject: "Most Exclusive Feedback from #{doc.email}"
             text: "#{doc.message}"

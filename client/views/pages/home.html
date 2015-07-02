@@ -4,9 +4,11 @@
   {{else}}
     <h1 class='text-center'>Most Exclusive Website<br><small>One visitor at a time, every sixty seconds. Get your ticket.</small></h1>
     <hr>
+    {{{queueMeta.headerHTML}}}
     <div class='text-center h4'><button class='btn btn-raised btn-default' data-toggle="modal" data-target="#feedbackModal">Feedback? Advertise? Say hi?</button></div>
     <hr>
   {{/if}}
+
   <div class='row'>
     <div class='col-sm-12'>
       <p class='h4 text-center'>Next Ticket</p>
@@ -32,9 +34,11 @@
   <div class='row'>
     <div class='col-sm-12'>
       <p class='h4 text-center'><b>{{totalWaitTime}}</b> were spent waiting to be exclusive.</p>
-      <p class='h4 text-center'>Created by <b><a href='https://github.com/jfols'>jfols</a></b> with <i class="fa fa-heart"></i> in Ohio</p>
+      <p class='h4 text-center'>Created by <b><a href='https://github.com/jfols'>jfols</a></b> and <a href='http://modweb.io'>modweb.io</a> with <i class="fa fa-heart"></i> in Ohio</p>
+      <div class='text-center'><a href='https://github.com/jfols'><i class="fa fa-github fa-3x"></i></a>    <a href='https://www.linkedin.com/in/jfols'><i class="fa fa-linkedin fa-3x"></i></a></div>
     </div>
   </div>
+  {{{queueMeta.footerHTML}}}
 
 <!-- Modal -->
 <div class="modal fade" id="feedbackModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">

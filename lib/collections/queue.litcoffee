@@ -44,6 +44,12 @@ ConnectionSchema has an ascending index on `ticketNumber`
       html:
         type: String
         optional: yes
+      headerHTML:
+        type: String
+        optional: yes
+      footerHTML:
+        type: String
+        optional: yes
 
     QueueProcessedSchema = new SimpleSchema
       connection:
