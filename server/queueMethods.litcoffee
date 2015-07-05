@@ -50,7 +50,7 @@ Insert the processed connection to `QueueProcessed`
 
 Remove the connection from the `Queue`
 
-          criteria = connectionId: queueMeta.theOnlyConnectionAllowedIn.connectionId
+          criteria = _id: queueMeta.currentlyServingQueueId
           Queue.remove criteria
 
 Update `QueueMeta` stats and ticket number.
@@ -81,6 +81,7 @@ Otherwise clear out theOnlyConnectionAllowedIn.
             theOnlyConnectionAllowedIn: nextConnection
             timeCurrentTicketExpires: timeCurrentTicketExpires.toDate()
             currentlyServingTicketNumber: nextConnection.ticketNumber
+            currentlyServingQueueId: nextConnection._id
 
 If there is no nextConnection, unset theOnlyConnectionAllowedIn.
 Note, fake data is filled in to pass schema, even though we're $unset'ing
@@ -104,12 +105,42 @@ If `update` isn't empty, update!
 TODO: keep it DRY; logic isn't exactly shared and want to keep update atomic to
 avoid extraneous DDP messages.
 
-## Disconnect, remove from queue
+## Disconnect dead connections, remove from queue
 
-    Meteor.onConnection (connection) ->
-      connection.onClose ->
+      cleanUpDeadConnections: ->
 
-Remove the connection from the `Queue`
+A connection is dead if keepAlive > 5 minutes ago
 
-        criteria = connectionId: connection.id
-        Queue.remove criteria
+        timeTwoMinutesAgoUtc = moment.utc().subtract('2', 'minutes').toDate()
+        criteria =
+          timeKeepAlive:
+            $lt: timeTwoMinutesAgoUtc
+
+        deadQueue = Queue.find criteria
+        deadQueue.forEach (queue) ->
+          criteria =
+            _id: queue._id
+          Queue.remove criteria
+
+Calculate how long the connection had to wait in line.
+
+          waitTimeSeconds = moment.utc().diff (moment.utc queue.timeEnqueued), 'seconds'
+
+Make the processed object.
+
+          processed =
+            connection: queue
+            waitTimeSeconds: waitTimeSeconds
+            diconnect: yes
+          QueueProcessed.insert processed
+
+          queueMeta = QueueMeta.findOne()
+
+          totalWaitTimeSeconds = queueMeta.totalWaitTimeSeconds + waitTimeSeconds
+
+          criteria =
+            _id: queueMeta._id
+          action =
+            $set:
+              totalWaitTimeSeconds: totalWaitTimeSeconds
+          QueueMeta.update criteria, action

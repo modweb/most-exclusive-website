@@ -19,25 +19,18 @@ Hacks, should probably be using Tracker for this
         lineLength = 0 if lineLength < 0
         return lineLength
       numberOfTicketsBeforeYou: ->
-        (Session.get 'queueEntry')?.ticketNumber - this.queueMeta.currentlyServingTicketNumber
-      queueEntry: ->
-        Session.get 'queueEntry'
+        this.queueEntry?.ticketNumber - this.queueMeta.currentlyServingTicketNumber
       html: -> this.queueMeta.html
       isBeingServed: ->
-        queueEntry = Session.get 'queueEntry'
-        return if not queueEntry?
+        return no if not this.queueEntry?
 
 Get new gifUrl
 
-        Session.set 'gifUrl',"http://thecatapi.com/api/images/get?format=src&type=gif&size=med&time=#{new Date().getTime()}"
-
-Clear queueEntry if queueMeta.currentlyServingTicketNumber is > queueEntry.ticketNumber
-
-        if this.queueMeta.currentlyServingTicketNumber > queueEntry.ticketNumber
-          Session.set 'queueEntry', null
-
-        this.queueMeta.currentlyServingTicketNumber is queueEntry.ticketNumber and
-          this.queueMeta.timeCurrentTicketExpires > moment.utc().toDate()
+        isBeingServed = this.queueEntry._id is this.queueMeta?.currentlyServingQueueId
+        if not isBeingServed
+          Session.set 'gifUrl', null
+          Session.set 'queueId', null
+        return isBeingServed
 
     Template.waiting.events
       'click .queueInLine': (event) ->

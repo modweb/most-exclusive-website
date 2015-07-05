@@ -14,14 +14,15 @@ ConnectionSchema has an ascending index on `ticketNumber`
       ticketNumber:
         type: Number
         index: 1
-      connectionId:
-        type: String
-        max: 20
       name:
         type: String
         max: 100
       timeEnqueued:
         type: Date
+      timeKeepAlive:
+        type: Date
+        optional: yes
+        index: 1
 
     QueueMetaSchema = new SimpleSchema
       theOnlyConnectionAllowedIn:
@@ -31,6 +32,9 @@ ConnectionSchema has an ascending index on `ticketNumber`
         type: Boolean
       currentlyServingTicketNumber:
         type: Number
+      currentlyServingQueueId:
+        type: String
+        optional: yes
       timeCurrentTicketExpires:
         type: Date
       averageWaitTimeSeconds:
@@ -60,6 +64,9 @@ ConnectionSchema has an ascending index on `ticketNumber`
         type: String
         max: 20
         optional: yes
+      disconnect:
+        type: Boolean
+        optional: yes
 
     @Queue = new Meteor.Collection 'queue'
     Queue.attachSchema ConnectionSchema
@@ -81,14 +88,6 @@ Validate doc
 
         check doc, NameSchema
 
-Check that the connection is not already in the queue.
-
-        criteria =
-          connectionId: this.connection.id
-
-        if (Queue.find criteria).count() isnt 0
-          Meteor.Error 'ditch-attempt', "Don't try to cut in line...it's not nice."
-
 Get the next ticketNumber
 
         queueMeta = QueueMeta.findOne()
@@ -100,15 +99,16 @@ Get the next ticketNumber
 
 Create queue object
 
+        now = moment.utc().toDate()
         connection =
           ticketNumber: nextTicketNumber
-          connectionId: this.connection.id
           name: doc.name
-          timeEnqueued: moment.utc().toDate()
+          timeEnqueued: now
+          timeKeepAlive: now
 
 Push onto the queue
 
-        Queue.insert connection
+        queueId = Queue.insert connection
 
 Increment nextTicketNumber (because we've pulled the current next ticket number)
 
@@ -135,27 +135,14 @@ Send a notification email, unblock
         catch error
           console.log error
 
-        return connection
+        return queueId
 
-      updateConnectionId: (oldConnectionId) ->
+      keepAlive: (_id) ->
         return if this.isSimulation
-        this.unblock()
-        newConnectionId = this.connection.id
-        return if not newConnectionId? or not oldConnectionId?
         criteria =
-          connectionId: oldConnectionId
+          _id: _id
         action =
           $set:
-            connectionId: newConnectionId
+            timeKeepAlive: moment.utc().toDate()
 
         Queue.update criteria, action
-
-Update QueueMeta (TODO: way around lots of failed updates?)
-
-        criteria =
-          'theOnlyConnectionAllowedIn.connectionId': oldConnectionId
-        action =
-          $set:
-            'theOnlyConnectionAllowedIn.connectionId': newConnectionId
-
-        QueueMeta.update criteria, action

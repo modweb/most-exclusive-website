@@ -8,5 +8,11 @@
         criteria = {}
       QueueMeta.find(criteria)
 
+    Meteor.publish 'singleQueue', (_id) ->
+      if _id?
+        Queue.find _id: _id
+      else
+        [ ]
+
     Meteor.publish 'topPosts', ->
       Posts.find {}, {sort: {ticketNumber: -1}, limit: 10 }

@@ -13,8 +13,13 @@ in the reset of the data.
         type: String
         regEx: SimpleSchema.RegEx.Url
         optional: yes
+      queueId:
+        type: String
+        optional: yes
 
     PostSchema = new SimpleSchema
+      queueId:
+        type: String
       name:
         type: String
       message:
@@ -34,9 +39,6 @@ in the reset of the data.
             return moment.utc().toDate()
           else
             this.unset()
-      connectionId:
-        type: String
-        max: 20
       ticketNumber:
         type: Number
         index: 1
@@ -63,7 +65,7 @@ Get the queueMeta
 
 Check that the connection is theOnlyConnectionAllowedIn
 
-        isAllowedIn = this.connection.id is queueMeta.theOnlyConnectionAllowedIn?.connectionId
+        isAllowedIn = doc.queueId is queueMeta.currentlyServingQueueId
         throw new Meteor.Error 'no-access', "You're not allowed to do that until you're in." if not isAllowedIn
 
 Check that the connection hasn't already posted a message
@@ -93,6 +95,7 @@ Post message
             link: doc.link
             connectionId: queueMeta.theOnlyConnectionAllowedIn.connectionId
             ticketNumber: queueMeta.theOnlyConnectionAllowedIn.ticketNumber
+            queueId: doc.queueId
 
           if html?
             _.extend post, html: html

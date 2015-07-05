@@ -15,46 +15,18 @@ Autoform callback hooks
         lineLength = this.queueMeta.nextTicketNumber - this.queueMeta.currentlyServingTicketNumber - 1
         lineLength = 0 if lineLength < 0
         return lineLength
-      queueEntry: ->
-        Session.get 'queueEntry'
       totalWaitTime: ->
         minutes = (this.queueMeta.totalWaitTimeSeconds / 60).toFixed 2
         "#{minutes} minutes"
       nameAllowedIn: ->
         return this.queueMeta?.theOnlyConnectionAllowedIn?.name
       isBeingServed: ->
-        queueEntry = Session.get 'queueEntry'
-        return if not queueEntry?
-
-Get new gifUrl
-
-        Session.set 'gifUrl',"http://thecatapi.com/api/images/get?format=src&type=jpg&size=med&time=#{new Date().getTime()}"
-
-Clear queueEntry if queueMeta.currentlyServingTicketNumber is > queueEntry.ticketNumber
-
-        if this.queueMeta.currentlyServingTicketNumber > queueEntry.ticketNumber
-          Session.set 'queueEntry', null
-
-        result = this.queueMeta.currentlyServingTicketNumber is queueEntry.ticketNumber
-
-    Template.home.events
-      'click .queueInLine': (event) ->
-
-Return immediatly if the user is already queued. More logic on the server, but
-this will help.
-
-        return if (Session.get 'queueEntry')?
-
-Call the meteor method to get queued.
-
-        Meteor.call 'getInQueue', 'fakeName', (error, result) ->
-          if error?
-            console.log err
-          else
-            Session.set 'queueEntry', result
+        return no if not this.queueEntry?
+        now = moment().utc().toDate()
+        isBeingServed = this.queueEntry._id is this.queueMeta?.currentlyServingQueueId and
+          this.queueMeta.timeCurrentTicketExpires > now
 
       'click .submit-feedback': (event) ->
-        console.log 'clicked!'
         $('#feedbackModal').modal 'hide'
 
     Template.home.rendered = ->
