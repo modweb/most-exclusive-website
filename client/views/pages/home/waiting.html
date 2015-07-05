@@ -1,13 +1,8 @@
 <template name='waiting'>
   <div class='row'>
-    {{#if queueEntry}}
+    {{#if queued}}
       <div class='col-sm-12 col-md-6 col-md-offset-3'>
-        <p class='text-center'>You are behind {{numberOfTicketsBeforeYou}}
-          {{#if $eq numberOfTicketsBeforeYou 1}}
-            person.
-          {{else}}
-            people.
-          {{/if}} Your ticket number is <b>#{{queueEntry.ticketNumber}}</b>.</p>
+        <p class='text-center h3'>Your ticket number is <b>#{{queueEntry.ticketNumber}}</b></p>
       </div>
     {{else}}
       <div class='col-sm-12 col-md-6 col-md-offset-3'>

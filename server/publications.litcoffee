@@ -16,3 +16,7 @@
 
     Meteor.publish 'topPosts', ->
       Posts.find {}, {sort: {ticketNumber: -1}, limit: 10 }
+
+    Meteor.publish 'queueCount', ->
+      Counts.publish this, 'queueCount', Queue.find()
+      return undefined

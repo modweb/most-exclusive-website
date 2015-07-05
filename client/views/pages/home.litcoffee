@@ -11,10 +11,6 @@ Autoform callback hooks
       clock.start() if time > 0
 
     Template.home.helpers
-      lineLength: ->
-        lineLength = this.queueMeta.nextTicketNumber - this.queueMeta.currentlyServingTicketNumber - 1
-        lineLength = 0 if lineLength < 0
-        return lineLength
       totalWaitTime: ->
         minutes = (this.queueMeta.totalWaitTimeSeconds / 60).toFixed 2
         "#{minutes} minutes"

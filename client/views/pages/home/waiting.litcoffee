@@ -11,15 +11,8 @@ Autoform callback hooks
 
     Template.waiting.helpers
       nameSchema: -> NameSchema
-      lineLength: ->
-
-Hacks, should probably be using Tracker for this
-
-        lineLength = this.queueMeta.nextTicketNumber - this.queueMeta.currentlyServingTicketNumber - 1
-        lineLength = 0 if lineLength < 0
-        return lineLength
-      numberOfTicketsBeforeYou: ->
-        this.queueEntry?.ticketNumber - this.queueMeta.currentlyServingTicketNumber
+      queued: ->
+        this.queueEntry?
       html: -> this.queueMeta.html
       isBeingServed: ->
         return no if not this.queueEntry?
