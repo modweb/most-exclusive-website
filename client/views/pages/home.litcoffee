@@ -28,7 +28,7 @@ Autoform callback hooks
 
 Get new gifUrl
 
-        Session.set 'gifUrl',"http://thecatapi.com/api/images/get?format=src&type=jpg&size=med&time=#{new Date().getTime()}"
+        Session.set 'gifUrl',"http://thecatapi.com/api/images/get?format=src&type=gif&size=med&time=#{new Date().getTime()}"
 
 Clear queueEntry if queueMeta.currentlyServingTicketNumber is > queueEntry.ticketNumber
 
