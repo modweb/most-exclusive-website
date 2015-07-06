@@ -1,5 +1,4 @@
     updateClock = (timeCurrentTicketExpires) ->
-      console.log 'set time', timeCurrentTicketExpires
       clock = ($ '.countdown-clock').FlipClock
         autoStart: yes
         countdown: yes

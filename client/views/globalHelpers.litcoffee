@@ -26,3 +26,7 @@ Not being served in either queueEntry or queueMeta are non-existant
       now = moment().utc().toDate()
       isBeingServed = queueEntry._id is queueMeta?.currentlyServingQueueId and
         queueMeta.timeCurrentTicketExpires > now
+      if isBeingServed
+        cachedIsBeingServed = Session.get 'isBeingServed'
+        Session.set 'isBeingServed', yes if cachedIsBeingServed is undefined or no
+      return isBeingServed

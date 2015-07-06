@@ -5,11 +5,11 @@
         waitOn: ->
           if Meteor.isClient
             queueId = Session.get 'queueId'
-            console.log "waitOn: #{queueId}"
+            isBeingServed = Session.get 'isBeingServed'
             result =
               [
                 Meteor.subscribe 'queueMeta'
-                Meteor.subscribe 'topPosts'
+                Meteor.subscribe 'topPosts', queueId, isBeingServed
                 Meteor.subscribe 'singleQueue', queueId
                 Meteor.subscribe 'queueCount'
               ]
