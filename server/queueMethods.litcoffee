@@ -111,10 +111,10 @@ avoid extraneous DDP messages.
 
 A connection is dead if keepAlive > 5 minutes ago
 
-        timeTwoMinutesAgoUtc = moment.utc().subtract('2', 'minutes').toDate()
+        timeFiveMinutesAgoUtc = moment.utc().subtract('5', 'minutes').toDate()
         criteria =
           timeKeepAlive:
-            $lt: timeTwoMinutesAgoUtc
+            $lt: timeFiveMinutesAgoUtc
 
         deadQueue = Queue.find criteria
         deadQueue.forEach (queue) ->
