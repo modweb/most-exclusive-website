@@ -124,7 +124,7 @@ A connection is dead if keepAlive > 5 minutes ago
 
 Calculate how long the connection had to wait in line.
 
-          waitTimeSeconds = moment.utc().diff (moment.utc queue.timeEnqueued), 'seconds'
+          waitTimeSeconds = moment.utc().diff (moment.utc queue.timeKeepAlive), 'seconds'
 
 Make the processed object.
 
