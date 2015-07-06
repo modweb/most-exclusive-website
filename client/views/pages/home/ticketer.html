@@ -1,0 +1,16 @@
+<template name='ticketer'>
+  <div class='row'>
+    <div class='col-sm-12'>
+      {{#if $eq lineLength 1}}
+        <p class='h2 text-center'>Currently serving <b>{{nameAllowedIn}}</b> with ticket <b>#{{this.queueMeta.currentlyServingTicketNumber}}</b><br>There is <b>{{lineLength}}</b> person in line</p>
+      {{else}}
+        <p class='h2 text-center'>Currently serving <b>{{nameAllowedIn}}</b> with ticket <b>#{{this.queueMeta.currentlyServingTicketNumber}}</b><br>There are <b>{{lineLength}}</b> people in line</p>
+      {{/if}}
+    </div>
+  </div>
+  {{#if isBeingServed}}
+    {{> in}}
+  {{else}}
+    {{> waiting}}
+  {{/if}}
+</template>

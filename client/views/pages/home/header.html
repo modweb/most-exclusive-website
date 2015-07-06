@@ -1,0 +1,9 @@
+<template name='header'>
+  {{#if isBeingServed}}
+    <h1 class='text-center'>Most Exclusive Website<br><small>It's all yours, relish in the glory of exclusivity.</small></h1>
+  {{else}}
+    <h1 class='text-center'>Most Exclusive Website<br><small>One visitor at a time, every sixty seconds. Get your ticket.</small></h1>
+    <hr>
+    {{{queueMeta.headerHTML}}}
+  {{/if}}
+</template>

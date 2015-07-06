@@ -1,6 +1,5 @@
-Autoform callback hooks
-
     updateClock = (timeCurrentTicketExpires) ->
+      console.log 'set time', timeCurrentTicketExpires
       clock = ($ '.countdown-clock').FlipClock
         autoStart: yes
         countdown: yes
@@ -10,6 +9,7 @@ Autoform callback hooks
       clock.setTime time
       clock.start() if time > 0
 
-    Template.home.rendered = ->
+    Template.nextTicket.rendered = ->
       Tracker.autorun ->
-        updateClock QueueMeta.findOne()?.timeCurrentTicketExpires
+        timeCurrentTicketExpires = Session.get 'timeCurrentTicketExpires'
+        updateClock timeCurrentTicketExpires

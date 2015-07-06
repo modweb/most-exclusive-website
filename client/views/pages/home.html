@@ -1,62 +1,7 @@
 <template name='home'>
-  {{#if isBeingServed}}
-    <h1 class='text-center'>Most Exclusive Website<br><small>It's all yours, relish in the glory of exclusivity.</small></h1>
-  {{else}}
-    <h1 class='text-center'>Most Exclusive Website<br><small>One visitor at a time, every sixty seconds. Get your ticket.</small></h1>
-    <hr>
-    {{{queueMeta.headerHTML}}}
-    <div class='text-center h4'>Tweet <b>@modwebio</b> while you wait <b>#mostexclusive</b></div>
-    <div class='text-center h4'><button class='btn btn-raised btn-default' data-toggle="modal" data-target="#feedbackModal">Feedback? Advertise? Say hi?</button></div>
-    <hr>
-  {{/if}}
-
-  <div class='row'>
-    <div class='col-sm-12'>
-      <p class='h4 text-center'>Next Ticket</p>
-      <div class='center-block' style='width:300px;'>
-        <div class='countdown-clock'></div>
-      </div>
-    </div>
-  </div>
-  <div class='row'>
-    <div class='col-sm-12'>
-      {{#if $eq lineLength 1}}
-        <p class='h2 text-center'>Currently serving <b>{{nameAllowedIn}}</b> with ticket <b>#{{this.queueMeta.currentlyServingTicketNumber}}</b><br>There is <b>{{lineLength}}</b> person in line</p>
-      {{else}}
-        <p class='h2 text-center'>Currently serving <b>{{nameAllowedIn}}</b> with ticket <b>#{{this.queueMeta.currentlyServingTicketNumber}}</b><br>There are <b>{{lineLength}}</b> people in line</p>
-      {{/if}}
-    </div>
-  </div>
-  {{#if isBeingServed}}
-    {{> in}}
-  {{else}}
-    {{> waiting}}
-  {{/if}}
-  <div class='row'>
-    <div class='col-sm-12'>
-      <p class='h4 text-center'><b>{{totalWaitTime}}</b> were spent waiting to be exclusive.</p>
-      <p class='h4 text-center'>Created by <b><a href='https://www.linkedin.com/in/jfols'>Justin Foley</a></b> and <b><a href='http://modweb.io'>modweb.io</a></b> with <i class="fa fa-heart"></i> in Ohio</p>
-      <p class='h5 text-center'>Buy me a coffee and support the electricty to run this site <a href='http://www.gofundme.com/ybxs58'>here</a></p>
-      <div class='text-center'><a href='https://github.com/jfols'><i class="fa fa-github fa-3x"></i></a>    <a href='https://www.linkedin.com/in/jfols'><i class="fa fa-linkedin fa-3x"></i></a></div>
-    </div>
-  </div>
-  {{{queueMeta.footerHTML}}}
-
-<!-- Modal -->
-<div class="modal fade" id="feedbackModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h4 class="modal-title" id="myModalLabel">Let's get in touch!</h4>
-        <hr>
-      </div>
-      <div class="modal-body">
-        {{> feedback}}
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-      </div>
-    </div>
-  </div>
-</div>
+  {{> header}}
+  {{> about}}
+  {{> nextTicket}}
+  {{> ticketer}}
+  {{> footer}}
 </template>
