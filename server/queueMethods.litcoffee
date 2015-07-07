@@ -131,7 +131,7 @@ Make the processed object.
           processed =
             connection: queue
             waitTimeSeconds: waitTimeSeconds
-            diconnect: yes
+            disconnect: yes
           QueueProcessed.insert processed
 
           queueMeta = QueueMeta.findOne()
