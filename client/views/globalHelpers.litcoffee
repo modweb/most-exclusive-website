@@ -3,7 +3,7 @@
       "#{minutes} minutes"
 
     Template.registerHelper 'totalWaitTimeYears', ->
-      secondsInYear = 31536000
+      secondsInYear = 31556900
       years = (QueueMeta.findOne()?.totalWaitTimeSeconds / secondsInYear ).toFixed 2
       "#{years} years"
 
