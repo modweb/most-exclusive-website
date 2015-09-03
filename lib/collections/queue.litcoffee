@@ -23,6 +23,9 @@ ConnectionSchema has an ascending index on `ticketNumber`
         type: Date
         optional: yes
         index: 1
+      connectionId:
+        type: String
+        optional: yes
 
     QueueMetaSchema = new SimpleSchema
       theOnlyConnectionAllowedIn:
@@ -105,6 +108,18 @@ Create queue object
           name: doc.name
           timeEnqueued: now
           timeKeepAlive: now
+          connectionId: this.connection.id
+
+        console.log connection
+
+Check if connection is already queued
+
+        critieria =
+          connectionId: this.connection.id
+
+        count = (Queue.find critieria).count()
+        if count isnt 0
+          throw new Meteor.Error 'get-outta-hereeeee', "Yo Mr. or Mrs. l33t, don't spoil the fun by trying to take lots of tickets."
 
 Push onto the queue
 
