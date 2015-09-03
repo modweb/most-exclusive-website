@@ -1,6 +1,7 @@
     Template.registerHelper 'totalWaitTimeMinutes', ->
       minutes = (QueueMeta.findOne()?.totalWaitTimeSeconds / 60).toFixed 0
-      "#{minutes} minutes"
+      minutesFormatted = minutes.toString().replace /\B(?=(\d{3})+(?!\d))/g, ','
+      "#{minutesFormatted} minutes"
 
     Template.registerHelper 'totalWaitTimeYears', ->
       secondsInYear = 31556900
