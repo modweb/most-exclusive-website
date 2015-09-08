@@ -26,8 +26,8 @@
           return Posts.find {}, {sort: {ticketNumber: -1}, limit: 100 }
       return [ ]
 
-    Meteor.publish 'top10Posts', ->
-      Posts.find {}, { sort: {ticketNumber: -1}, limit: 10 }
+    Meteor.publish 'mostRecentPosts', ->
+      Posts.find {}, { sort: {ticketNumber: -1}, limit: 5 }
 
     Meteor.publish 'queueCount', ->
       Counts.publish this, 'queueCount', Queue.find()
