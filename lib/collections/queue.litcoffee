@@ -110,8 +110,6 @@ Create queue object
           timeKeepAlive: now
           connectionId: this.connection.id
 
-        console.log connection
-
 Check if connection is already queued
 
         critieria =

@@ -12,6 +12,7 @@
                 Meteor.subscribe 'topPosts', queueId, isBeingServed
                 Meteor.subscribe 'singleQueue', queueId
                 Meteor.subscribe 'queueCount'
+                Meteor.subscribe 'top10Posts'
               ]
         data: ->
           result =

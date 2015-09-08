@@ -14,7 +14,6 @@ TODO: handle errors...
       AutoForm.addHooks 'postForm',
         before:
           method: (doc) ->
-            console.log doc
             doc.queueId = Queue.findOne()._id
             Session.set 'gifUrl',"http://thecatapi.com/api/images/get?format=src&type=gif&size=med&time=#{new Date().getTime()}"
             return doc

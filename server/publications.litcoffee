@@ -22,9 +22,12 @@
         else
           criteria = {}
         queueMeta = QueueMeta.findOne criteria
-        if queueId is queueMeta.currentlyServingQueueId
+        if queueId is queueMeta?.currentlyServingQueueId
           return Posts.find {}, {sort: {ticketNumber: -1}, limit: 100 }
       return [ ]
+
+    Meteor.publish 'top10Posts', ->
+      Posts.find {}, { sort: {ticketNumber: -1}, limit: 10 }
 
     Meteor.publish 'queueCount', ->
       Counts.publish this, 'queueCount', Queue.find()
