@@ -20,7 +20,6 @@ meteorhacks:kadira
 reywood:iron-router-ga
 gfk:mailgun-api
 http
-meteorhacks:cluster
 spiderable
 iron:router
 tmeasday:publish-counts
