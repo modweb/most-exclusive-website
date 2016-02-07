@@ -29,21 +29,5 @@ Get new gifUrl
           Session.set 'queueId', null
         return isBeingServed
 
-    Template.waiting.events
-      'click .queueInLine': (event) ->
-
-Return immediatly if the user is already queued. More logic on the server, but
-this will help.
-
-        return if (Session.get 'queueEntry')?
-
-Call the meteor method to get queued.
-
-        Meteor.call 'getInQueue', 'fakeName', (error, result) ->
-          if error?
-            console.log err
-          else
-            Session.set 'queueEntry', result
-
       Template.waiting.rendered = ->
         $('body').css 'background-color', '#eee'
