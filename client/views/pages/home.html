@@ -1,7 +1,11 @@
 <template name='home'>
-  {{> header}}
-  {{> nextTicket}}
-  {{> ticketer}}
-  {{> about}}
-  {{> footer}}
+  {{#if Template.subscriptionsReady}}
+    {{> header}}
+    {{> nextTicket}}
+    {{> ticketer}}
+    {{> about}}
+    {{> footer}}
+  {{else}}
+    {{> loading}}
+  {{/if}}
 </template>

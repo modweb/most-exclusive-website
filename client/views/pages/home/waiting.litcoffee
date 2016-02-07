@@ -11,16 +11,19 @@ Autoform callback hooks
 
     Template.waiting.helpers
       nameSchema: -> NameSchema
-      queued: ->
-        this.queueEntry?
-      html: -> this.queueMeta.html
-      isActive: -> this.queueMeta.isActive
+      queued: -> Queue.findOne()?
+      ticketNumber: -> Queue.findOne()?.ticketNumber
+      html: -> QueueMeta.findOne()?.html
+      isActive: -> QueueMeta.findOne()?.isActive
+      posts: ->
+        postsSort = (post) -> -post.ticketNumber
+        posts = _.sortBy(Posts.find().fetch(), postsSort)
       isBeingServed: ->
-        return no if not this.queueEntry?
+        return no if not Queue.findOne()?
 
 Get new gifUrl
 
-        isBeingServed = this.queueEntry._id is this.queueMeta?.currentlyServingQueueId
+        isBeingServed = Queue.findOne()?._id is QueueMeta.findOne()?.currentlyServingQueueId
         if not isBeingServed
           Session.set 'gifUrl', null
           Session.set 'queueId', null

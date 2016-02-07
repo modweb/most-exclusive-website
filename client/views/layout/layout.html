@@ -1,6 +1,6 @@
 <template name="layout">
   {{> connectionBanner}}
   <div class="container" role="main">
-    {{> yield}}
+    {{> Template.dynamic template=content}}
   </div>
 </template>

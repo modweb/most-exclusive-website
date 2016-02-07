@@ -1,8 +1,11 @@
     Template.in.helpers
       postFormSchema: -> PostFormSchema
-      hasPosted: -> this.queueMeta.hasCurrentConnectionPosted
+      hasPosted: -> QueueMeta.findOne()?.hasCurrentConnectionPosted
       gifUrl: -> Session.get 'gifUrl'
-      html: -> this.queueMeta.html
+      html: -> QueueMeta.findOne()?.html
+      posts: ->
+        postsSort = (post) -> -post.ticketNumber
+        posts = _.sortBy(Posts.find().fetch(), postsSort)
 
     Template.in.rendered = ->
       $('body').css 'background-color', '#b2ebf2'
