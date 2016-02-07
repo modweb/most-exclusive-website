@@ -6,10 +6,14 @@
       </div>
     {{else}}
       <div class='col-sm-12 col-md-6 col-md-offset-3'>
-        {{#autoForm id='getInLine' schema=nameSchema type='method' meteormethod='getInQueue'}}
-          {{> afQuickField name='name' label-class="sr-only" afFieldInput-placeholder="schemaLabel" }}
-          <button type='submit' class='btn btn-lg btn-info btn-raised' style='width: 100%'>Take ticket #{{this.queueMeta.nextTicketNumber}}</button>
-        {{/autoForm}}
+        {{#if isActive}}
+          {{#autoForm id='getInLine' schema=nameSchema type='method' meteormethod='getInQueue'}}
+            {{> afQuickField name='name' label-class="sr-only" afFieldInput-placeholder="schemaLabel" }}
+            <button type='submit' class='btn btn-lg btn-info btn-raised' style='width: 100%'>Take ticket #{{this.queueMeta.nextTicketNumber}}</button>
+          {{/autoForm}}
+        {{else}}
+          <p class='text-center'>[You can't take a ticket right now, going down for maintenance once line the line goes to 0.]</p>
+        {{/if}}
       </div>
     {{/if}}
   </div>

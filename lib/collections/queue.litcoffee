@@ -57,6 +57,10 @@ ConnectionSchema has an ascending index on `ticketNumber`
       footerHTML:
         type: String
         optional: yes
+      isActive:
+        type: Boolean
+        defaultValue: yes
+        optional: yes
 
     QueueProcessedSchema = new SimpleSchema
       connection:
@@ -97,6 +101,9 @@ Get the next ticketNumber
 
         if not queueMeta?
           Meteor.Error 'no-queue-meta', "There is no queue meta, something's wrong."
+
+        if not queueMeta.isActive
+          throw new Meteor.Error 'queue-inactive', "Queue is inactive, you can't take tickets right now."
 
         nextTicketNumber = queueMeta.nextTicketNumber
 

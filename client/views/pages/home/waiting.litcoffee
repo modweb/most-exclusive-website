@@ -14,6 +14,7 @@ Autoform callback hooks
       queued: ->
         this.queueEntry?
       html: -> this.queueMeta.html
+      isActive: -> this.queueMeta.isActive
       isBeingServed: ->
         return no if not this.queueEntry?
 
