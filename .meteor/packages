@@ -16,12 +16,11 @@ percolate:synced-cron
 raix:handlebar-helpers
 modweb:flipclock
 email
-meteorhacks:kadira
 reywood:iron-router-ga
 gfk:mailgun-api
 http
 spiderable
 iron:router
 tmeasday:publish-counts
-joshowens:shareit
 matteodem:easy-security
+standard-minifiers
