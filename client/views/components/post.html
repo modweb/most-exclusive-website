@@ -1,25 +1,24 @@
 <template name='post'>
-  <div class="event">
-    <div class="label">
-      <i class="comment icon"></i>
-    </div>
-    <div class="content">
-      <div class="summary">
-        <a class="user">
-          {{name}}
-        </a>
-        <div class="date">
-          {{> dateUTC value=timeCreated format='MMM Do h:mm:ss A'}}
+  <div class='ui vertical segment'>
+    <div class="event">
+      <div class="content">
+        <div class="summary">
+          <a class="user">
+            {{name}}
+          </a>
+          <div class="date">
+            {{> dateUTC value=timeCreated format='MMM Do h:mm:ss A'}}
+          </div>
         </div>
-      </div>
-      <div class="extra text">
-        {{message}}
-      </div>
-      {{#if link}}
         <div class="extra text">
-          <a href='{{link}}' target='_blank'>{{link}}</a>
+          {{message}}
         </div>
-      {{/if}}
+        {{#if link}}
+          <div class="extra text">
+            <a href='{{link}}' target='_blank'>{{link}}</a>
+          </div>
+        {{/if}}
+      </div>
     </div>
   </div>
 </template>
