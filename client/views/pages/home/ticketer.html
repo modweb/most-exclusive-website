@@ -1,16 +1,16 @@
 <template name='ticketer'>
-  <div class='row'>
-    <div class='col-sm-12'>
+  <div class='ui one column center aligned grid'>
+    <div class='column'>
       {{#if $eq lineLength 1}}
-        <p class='h2 text-center'>Currently serving <b>{{nameAllowedIn}}</b> with ticket <b>#{{currentlyServingTicketNumber}}</b><br>There is <b>{{lineLength}}</b> person in line</p>
+        <div class='ui medium header'>Currently serving <b>{{nameAllowedIn}}</b> with ticket <b>#{{currentlyServingTicketNumber}}</b><br>There is <b>{{lineLength}}</b> person in line</div>
       {{else}}
-        <p class='h2 text-center'>Currently serving <b>{{nameAllowedIn}}</b> with ticket <b>#{{currentlyServingTicketNumber}}</b><br>There are <b>{{lineLength}}</b> people in line</p>
+        <div class='ui medium header'>Currently serving <b>{{nameAllowedIn}}</b> with ticket <b>#{{currentlyServingTicketNumber}}</b><br>There are <b>{{lineLength}}</b> people in line</div>
       {{/if}}
     </div>
+    {{#if isBeingServed}}
+      {{> in}}
+    {{else}}
+      {{> waiting}}
+    {{/if}}
   </div>
-  {{#if isBeingServed}}
-    {{> in}}
-  {{else}}
-    {{> waiting}}
-  {{/if}}
 </template>

@@ -13,11 +13,9 @@ Autoform callback hooks
       nameSchema: -> NameSchema
       queued: -> Queue.findOne()?
       ticketNumber: -> Queue.findOne()?.ticketNumber
+      nextTicketNumber: -> QueueMeta.findOne()?.nextTicketNumber
       html: -> QueueMeta.findOne()?.html
       isActive: -> QueueMeta.findOne()?.isActive
-      posts: ->
-        postsSort = (post) -> -post.ticketNumber
-        posts = _.sortBy(Posts.find().fetch(), postsSort)
       isBeingServed: ->
         return no if not Queue.findOne()?
 

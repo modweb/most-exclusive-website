@@ -3,6 +3,11 @@
     {{> header}}
     {{> nextTicket}}
     {{> ticketer}}
+    <div class="ui feed">
+      {{#each posts}}
+        {{> post}}
+      {{/each}}
+    </div>
     {{> about}}
     {{> footer}}
   {{else}}

@@ -5,17 +5,12 @@
 
 standard-app-packages
 coffeescript
-natestrauser:connection-banner
-fezvrasta:bootstrap-material-design
-fortawesome:fontawesome
 aldeed:autoform
 aldeed:collection2
 momentjs:moment
 percolate:synced-cron
 raix:handlebar-helpers
-modweb:flipclock
 email
-gfk:mailgun-api
 http
 spiderable
 tmeasday:publish-counts
@@ -25,3 +20,7 @@ ecmascript
 kadira:flow-router
 kadira:blaze-layout
 okgrow:analytics
+fabienb4:autoform-semantic-ui
+semantic:ui
+flemay:less-autoprefixer
+jquery

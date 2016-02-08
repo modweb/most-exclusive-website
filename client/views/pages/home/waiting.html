@@ -1,32 +1,31 @@
 <template name='waiting'>
-  <div class='row'>
+  <div class='ui one column center aligned grid'>
     {{#if queued}}
-      <div class='col-sm-12 col-md-6 col-md-offset-3'>
-        <p class='text-center h3'>Your ticket number is <b>#{{ticketNumber}}</b></p>
+      <div class='column'>
+        <div class='ui medium header'>
+          Your ticket number is <b>#{{ticketNumber}}</b>
+        </div>
       </div>
     {{else}}
-      <div class='col-sm-12 col-md-6 col-md-offset-3'>
+      <div class='column'>
         {{#if isActive}}
           {{#autoForm id='getInLine' schema=nameSchema type='method' meteormethod='getInQueue'}}
-            {{> afQuickField name='name' label-class="sr-only" afFieldInput-placeholder="schemaLabel" }}
-            <button type='submit' class='btn btn-lg btn-info btn-raised' style='width: 100%'>Take ticket #{{this.queueMeta.nextTicketNumber}}</button>
+            {{> afQuickField name='name' label=false afFieldInput-placeholder="Enter a name to take a ticket" }}
+            <button type='submit' class='ui primary button' style='width: 100%'>
+              Take ticket #{{nextTicketNumber}}
+            </button>
           {{/autoForm}}
         {{else}}
-          <p class='text-center'>[You can't take a ticket right now, going down for maintenance once line the line goes to 0.]</p>
+          <div class='ui small header'>
+            [You can't take a ticket right now, going down for maintenance once line the line goes to 0.]
+          </div>
         {{/if}}
       </div>
     {{/if}}
   </div>
-  <hr>
   {{#if html}}
-    <div class='row'>
-      <div class='col-sm-12 col-md-6 col-md-offset-3'>
-        {{{html}}}
-      </div>
+    <div class='column'>
+      {{{html}}}
     </div>
-    <hr>
   {{/if}}
-  {{#each posts}}
-    {{> post}}
-  {{/each}}
 </template>

@@ -1,12 +1,24 @@
 <template name='post'>
-  <div class='panel panel-default'>
-    <div class='panel-heading'>
-      <p class='h3 break-word'><b>{{name}}</b> <span class='small'>{{> dateUTC value=timeCreated format='MMM Do h:mm:ss A'}}</span></p>
+  <div class="event">
+    <div class="label">
+      <i class="comment icon"></i>
     </div>
-    <div class='panel-body'>
-      <p class='h4 break-word'>{{message}}</p>
+    <div class="content">
+      <div class="summary">
+        <a class="user">
+          {{name}}
+        </a>
+        <div class="date">
+          {{> dateUTC value=timeCreated format='MMM Do h:mm:ss A'}}
+        </div>
+      </div>
+      <div class="extra text">
+        {{message}}
+      </div>
       {{#if link}}
-        <a href='{{link}}' target='_blank'>{{link}}</a>
+        <div class="extra text">
+          <a href='{{link}}' target='_blank'>{{link}}</a>
+        </div>
       {{/if}}
     </div>
   </div>

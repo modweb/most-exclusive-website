@@ -28,11 +28,10 @@ ecmascript@0.1.6
 ecmascript-runtime@0.2.6
 ejson@1.0.7
 email@1.0.8
+fabienb4:autoform-semantic-ui@0.9.3
 fastclick@1.0.7
-fezvrasta:bootstrap-material-design@0.5.8
-fortawesome:fontawesome@4.5.0
+flemay:less-autoprefixer@1.2.0
 geojson-utils@1.0.4
-gfk:mailgun-api@1.1.0
 html-tools@1.0.5
 htmljs@1.0.5
 http@1.1.1
@@ -50,11 +49,9 @@ meteor-platform@1.2.3
 minifiers@1.1.7
 minimongo@1.0.10
 mobile-status-bar@1.0.6
-modweb:flipclock@0.0.1
 momentjs:moment@2.11.2
 mongo@1.1.3
 mongo-id@1.0.1
-natestrauser:connection-banner@0.4.3
 npm-mongo@1.4.39_1
 observe-sequence@1.0.7
 okgrow:analytics@1.0.4
@@ -69,6 +66,8 @@ reactive-var@1.0.6
 reload@1.1.4
 retry@1.0.4
 routepolicy@1.0.6
+semantic:ui@2.1.8
+semantic:ui-data@2.1.8
 session@1.1.1
 spacebars@1.0.7
 spacebars-compiler@1.0.7
@@ -79,7 +78,6 @@ templating@1.1.5
 templating-tools@1.0.0
 tmeasday:publish-counts@0.7.3
 tracker@1.0.9
-twbs:bootstrap@3.3.6
 ui@1.0.8
 underscore@1.0.4
 url@1.0.5
