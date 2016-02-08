@@ -1,15 +1,8 @@
-/* hack to fix minor bug in fezvrasta:bootstrap-material-design
-   see: https://github.com/FezVrasta/bootstrap-material-design/issues/394
-*/
-.btn-default:not(.btn-link):not(.btn-flat) {
-  color: black;
-}
-
-.break-word {
-  word-wrap: break-word;
-}
-
 .flip-clock-wrapper {
   margin-left: auto;
   margin-right: auto;
+}
+
+.ui.center.header {
+  margin-top: 1em;
 }

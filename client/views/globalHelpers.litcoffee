@@ -1,12 +1,10 @@
     Template.registerHelper 'totalWaitTimeMinutes', ->
       minutes = (QueueMeta.findOne()?.totalWaitTimeSeconds / 60).toFixed 0
       minutesFormatted = minutes.toString().replace /\B(?=(\d{3})+(?!\d))/g, ','
-      "#{minutesFormatted} minutes"
 
     Template.registerHelper 'totalWaitTimeYears', ->
       secondsInYear = 31556900
       years = (QueueMeta.findOne()?.totalWaitTimeSeconds / secondsInYear ).toFixed 2
-      "#{years} years"
 
     Template.registerHelper 'nameAllowedIn', ->
       QueueMeta.findOne()?.theOnlyConnectionAllowedIn?.name

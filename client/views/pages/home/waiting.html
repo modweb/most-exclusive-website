@@ -10,9 +10,9 @@
       <div class='column'>
         {{#if isActive}}
           {{#autoForm id='getInLine' schema=nameSchema type='method' meteormethod='getInQueue'}}
-            {{> afQuickField name='name' label=false afFieldInput-placeholder="Enter a name to take a ticket" }}
+            {{> afQuickField name='name' label=false afFieldInput-placeholder="Your name here" }}
             <button type='submit' class='ui primary button' style='width: 100%'>
-              Take ticket #{{nextTicketNumber}}
+              Get in line (ticket {{nextTicketNumber}})
             </button>
           {{/autoForm}}
         {{else}}

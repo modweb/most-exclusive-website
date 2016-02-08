@@ -13,7 +13,7 @@ Autoform callback hooks
       nameSchema: -> NameSchema
       queued: -> Queue.findOne()?
       ticketNumber: -> Queue.findOne()?.ticketNumber
-      nextTicketNumber: -> QueueMeta.findOne()?.nextTicketNumber
+      nextTicketNumber: -> QueueMeta.findOne()?.nextTicketNumber.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')
       html: -> QueueMeta.findOne()?.html
       isActive: -> QueueMeta.findOne()?.isActive
       isBeingServed: ->
