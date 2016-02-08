@@ -12,7 +12,7 @@ Autoform callback hooks
     Template.waiting.helpers
       nameSchema: -> NameSchema
       queued: -> Queue.findOne()?
-      ticketNumber: -> Queue.findOne()?.ticketNumber
+      ticketNumber: -> Queue.findOne()?.ticketNumber.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')
       nextTicketNumber: -> QueueMeta.findOne()?.nextTicketNumber.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')
       html: -> QueueMeta.findOne()?.html
       isActive: -> QueueMeta.findOne()?.isActive
