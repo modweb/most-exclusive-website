@@ -10,5 +10,6 @@
 }
 
 .flip-clock-wrapper {
-  margin: 0;
+  margin-left: auto;
+  margin-right: auto;
 }

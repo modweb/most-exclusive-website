@@ -2,7 +2,7 @@
       clock = ($ '.countdown-clock').FlipClock
         autoStart: yes
         countdown: yes
-        clockFace: 'MinuteCounter'
+        clockFace: 'Counter'
       time = Math.round (timeCurrentTicketExpires - new Date()) / 1000
       time = 0 if time < 0
       clock.setTime time
