@@ -15,7 +15,6 @@ http
 spiderable
 tmeasday:publish-counts
 matteodem:easy-security
-standard-minifiers
 ecmascript
 kadira:flow-router
 kadira:blaze-layout
@@ -25,3 +24,5 @@ semantic:ui
 flemay:less-autoprefixer
 jquery
 modweb:flipclock
+standard-minifier-css
+standard-minifier-js
