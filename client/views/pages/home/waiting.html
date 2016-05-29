@@ -1,25 +1,29 @@
 <template name='waiting'>
   <div class='ui one column center aligned grid'>
     {{#if queued}}
-      <div class='column'>
-        <div class='ui medium header'>
-          You've got ticket <b>{{ticketNumber}}</b>
+      {{#if queueMeta.headerHTML}}
+      <div class='ui one column center aligned grid'>
+        <div class='column'>
+          {{{queueMeta.headerHTML}}}
         </div>
       </div>
+      {{/if}}
     {{else}}
-      <div class='column'>
-        {{#if isActive}}
-          {{#autoForm id='getInLine' schema=nameSchema type='method' meteormethod='getInQueue'}}
-            {{> afQuickField name='name' label=false afFieldInput-placeholder="Your name here" }}
-            <button type='submit' class='ui primary button' style='width: 100%'>
-              Get in line (ticket {{nextTicketNumber}})
-            </button>
-          {{/autoForm}}
-        {{else}}
-          <div class='ui small header'>
-            [You can't take a ticket right now, going down for maintenance once line the line goes to 0.]
-          </div>
-        {{/if}}
+      <div class='doubling two column row'>
+        <div class='column'>
+          {{#if isActive}}
+            {{#autoForm id='getInLine' schema=nameSchema type='method' meteormethod='getInQueue'}}
+              {{> afQuickField name='name' label=false afFieldInput-placeholder="TYPE NAME HERE" }}
+              <button type='submit' class='ui massive primary button'>
+                GET IN LINE
+              </button>
+            {{/autoForm}}
+          {{else}}
+            <div class='ui small header'>
+              [You can't take a ticket right now, going down for maintenance once line the line goes to 0.]
+            </div>
+          {{/if}}
+        </div>
       </div>
     {{/if}}
   </div>

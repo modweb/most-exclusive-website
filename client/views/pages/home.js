@@ -15,5 +15,11 @@ Template.home.helpers({
       return -post.ticketNumber;
     };
     return _.sortBy(Posts.find().fetch(), postsSort);
-  }
+  },
+  queueMeta () {
+    return QueueMeta.findOne();
+  },
+  queued () {
+    return Queue.findOne() != null;
+  },
 });

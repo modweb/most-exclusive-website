@@ -26,6 +26,7 @@ Get new gifUrl
           Session.set 'gifUrl', null
           Session.set 'queueId', null
         return isBeingServed
+      queueMeta: -> QueueMeta.findOne()
 
       Template.waiting.rendered = ->
         $('body').css 'background-color', '#eee'

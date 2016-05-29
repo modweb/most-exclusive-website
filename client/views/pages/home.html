@@ -1,15 +1,19 @@
 <template name='home'>
   {{#if Template.subscriptionsReady}}
     {{> header}}
-    {{> nextTicket}}
-    {{> ticketer}}
-    <div class="ui feed">
-      {{#each posts}}
-        {{> post}}
-      {{/each}}
-    </div>
-    {{> about}}
-    {{> footer}}
+    {{#if queued}}
+      {{> nextTicket}}
+      {{> ticketer}}
+      <div class="ui feed">
+        {{#each posts}}
+          {{> post}}
+        {{/each}}
+      </div>
+      {{> about}}
+      {{> footer}}
+    {{else}}
+      {{> waiting}}
+    {{/if}}
   {{else}}
     {{> loading}}
   {{/if}}
