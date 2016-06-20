@@ -18,7 +18,7 @@ matteodem:easy-security
 ecmascript
 kadira:flow-router
 kadira:blaze-layout
-okgrow:analytics
+okgrow:analytics@=1.0.4
 fabienb4:autoform-semantic-ui
 semantic:ui
 flemay:less-autoprefixer

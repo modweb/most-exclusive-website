@@ -58,7 +58,7 @@ mongo@1.1.7
 mongo-id@1.0.4
 npm-mongo@1.4.43
 observe-sequence@1.0.11
-okgrow:analytics@1.0.6
+okgrow:analytics@1.0.4
 ordered-dict@1.0.7
 percolate:synced-cron@1.3.2
 promise@0.6.7
