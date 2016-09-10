@@ -1,8 +1,8 @@
 <template name='home'>
   {{#if Template.subscriptionsReady}}
+    {{> ticketer}}
     {{> header}}
     {{> nextTicket}}
-    {{> ticketer}}
     <div class="ui feed">
       {{#each posts}}
         {{> post}}
