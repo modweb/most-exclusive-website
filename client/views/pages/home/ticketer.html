@@ -1,15 +1,7 @@
 <template name='ticketer'>
   <div class='ui one column center aligned grid'>
     <div class='column'>
-      <div class='ui tiny three statistics'>
-        <div class="statistic">
-          <div class="value">
-            {{currentlyServingTicketNumber}}
-          </div>
-          <div class="label">
-            Current Ticket
-          </div>
-        </div>
+      <div class='ui tiny two statistics'>
         <div class="statistic">
           <div class="value">
             {{lineLength}}
@@ -37,7 +29,7 @@
       <div class="statistic">
         <div class="value">
           {{#if nameAllowedIn}}
-            {{nameAllowedIn}}
+            {{nameAllowedIn}} #{{currentlyServingTicketNumber}}
           {{else}}
             No one
           {{/if}}
