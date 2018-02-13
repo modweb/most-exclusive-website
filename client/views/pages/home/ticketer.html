@@ -15,7 +15,7 @@
             {{totalWaitTimeYears}}
           </div>
           <div class="label">
-            Years Waited
+            Human Years Waited
           </div>
         </div>
       </div>
@@ -27,15 +27,15 @@
     {{/if}}
     <div class="ui small one statistics">
       <div class="statistic">
+        <div class="label loading">
+          Now Serving
+        </div>
         <div class="value">
           {{#if nameAllowedIn}}
             {{nameAllowedIn}} #{{currentlyServingTicketNumber}}
           {{else}}
             No one
           {{/if}}
-        </div>
-        <div class="label">
-          Serving
         </div>
       </div>
     </div>

@@ -12,7 +12,7 @@
           {{#autoForm id='getInLine' schema=nameSchema type='method' meteormethod='getInQueue'}}
             {{> afQuickField name='name' label=false defaultValue="Your name here" }}
             <button type='submit' class='ui purple button getInLine' style='width: 100%; height:64px; margin-top: 5px'>
-              Get in line (#{{nextTicketNumber}})
+              Get in line (ticket #{{nextTicketNumber}})
             </button>
           {{/autoForm}}
         {{else}}
