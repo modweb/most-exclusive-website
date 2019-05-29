@@ -1,11 +1,28 @@
 <template name='about'>
-  <div class='ui one column center aligned grid'>
+  <div class='ui inverted one column center aligned grid'>
     <div class='column'>
-      <a href="https://twitter.com/share" class="twitter-share-button" data-url="http://mostexclusivewebsite.com" data-text="Feeling exclusive!" data-via="waitingforweb" data-size="large" data-hashtags="mostexclusive">Tweet</a> <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+      <a href="https://twitter.com/share" class="twitter-share-button" data-url="http://mostexclusivewebsite.com"
+        data-text="Feeling exclusive!" data-via="waitingforweb" data-size="large"
+        data-hashtags="mostexclusive">Tweet</a>
+      <script>
+        ! function (d, s, id) {
+          var js, fjs = d.getElementsByTagName(s)[0],
+            p = /^http:/.test(d.location) ? 'http' : 'https';
+          if (!d.getElementById(id)) {
+            js = d.createElement(s);
+            js.id = id;
+            js.src = p + '://platform.twitter.com/widgets.js';
+            fjs.parentNode.insertBefore(js, fjs);
+          }
+        }(document, 'script', 'twitter-wjs');
+
+      </script>
     </div>
     <div class='column'>
-      <p>Created by <b><a href='https://www.linkedin.com/in/jfols' target='_blank'>Justin Foley</a></b> and <b><a href='http://modweb.io' target='_blank'>modweb.io</a></b> in Columbus, Ohio</p>
-      <p>Tweet at me <b><a href='https://twitter.com/waitingforweb' target='_blank'>@waitingforweb</a></b> while you wait <b>#mostexclusive</b></p>
+      <p>Created by <b><a href='https://www.linkedin.com/in/jfols' target='_blank'>Justin Foley</a></b> and <b><a
+            href='http://modweb.io' target='_blank'>modweb.io</a></b> in Columbus, Ohio</p>
+      <p>Tweet at me <b><a href='https://twitter.com/waitingforweb' target='_blank'>@waitingforweb</a></b> while you
+        wait <b>#mostexclusive</b></p>
     </div>
   </div>
 </template>

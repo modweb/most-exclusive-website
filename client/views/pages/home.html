@@ -1,16 +1,16 @@
 <template name='home'>
   {{#if Template.subscriptionsReady}}
-    {{> ticketer}}
-    {{> header}}
-    {{> nextTicket}}
-    <div class="ui feed">
-      {{#each posts}}
-        {{> post}}
-      {{/each}}
-    </div>
-    {{> about}}
-    {{> footer}}
+  {{> header}}
+  {{> ticketer}}
+  {{> nextTicket}}
+  <div class="ui feed">
+    {{#each posts}}
+    {{> post}}
+    {{/each}}
+  </div>
+  {{> about}}
+  {{> footer}}
   {{else}}
-    {{> loading}}
+  {{> loading}}
   {{/if}}
 </template>

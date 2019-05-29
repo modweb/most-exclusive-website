@@ -1,20 +1,20 @@
 <template name='header'>
   {{#if isBeingServed}}
-    <h1 class='ui center aligned header'>
-      Most Exclusive Website
-      <div class='sub header'>It's all yours, relish in the glory of exclusivity.</div>
-    </h1>
+  <h1 class='ui center aligned header'>
+    Most Exclusive Website
+    <div class='sub header'>It's all yours, relish in the glory of exclusivity.</div>
+  </h1>
   {{else}}
-    <h1 class='ui center aligned header'>
-      Most Exclusive Website
-      <div class='sub header'>One visitor at a time, every sixty seconds. Get your ticket.</div>
-    </h1>
+  <h1 class='ui inverted center aligned header'>
+    Most Exclusive Website
+    <div class='sub header'>One visitor at a time, every sixty seconds. Get your ticket.</div>
+  </h1>
   {{/if}}
   {{#if queueMeta.headerHTML}}
-    <div class='ui one column center aligned grid'>
-      <div class='column'>
-        {{{queueMeta.headerHTML}}}
-      </div>
+  <div class='ui inverted one column center aligned grid'>
+    <div class='column'>
+      {{{queueMeta.headerHTML}}}
     </div>
+  </div>
   {{/if}}
 </template>

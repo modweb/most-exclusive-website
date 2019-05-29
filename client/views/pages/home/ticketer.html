@@ -1,7 +1,7 @@
 <template name='ticketer'>
-  <div class='ui one column center aligned grid'>
+  <div class='ui inverted one column center aligned grid'>
     <div class='column'>
-      <div class='ui tiny two statistics'>
+      <div class='ui inverted tiny two statistics'>
         <div class="statistic">
           <div class="value">
             {{lineLength}}
@@ -21,20 +21,20 @@
       </div>
     </div>
     {{#if isBeingServed}}
-      {{> in}}
+    {{> in}}
     {{else}}
-      {{> waiting}}
+    {{> waiting}}
     {{/if}}
-    <div class="ui small one statistics">
+    <div class="ui inverted small one statistics">
       <div class="statistic">
-        <div class="label loading">
+        <div class="label">
           Now Serving
         </div>
         <div class="value">
           {{#if nameAllowedIn}}
-            {{nameAllowedIn}} #{{currentlyServingTicketNumber}}
+          {{nameAllowedIn}} #{{currentlyServingTicketNumber}}
           {{else}}
-            No one
+          No one
           {{/if}}
         </div>
       </div>

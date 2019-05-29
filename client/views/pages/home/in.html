@@ -1,30 +1,30 @@
 <template name='in'>
-  <div class='ui one column center aligned grid'>
+  <div class='ui inverted one column center aligned grid'>
     <div class='column'>
       <div class='ui large header'>
         You're in until {{> dateUTC value=timeCurrentTicketExpires format='h:mm:ss A'}}.
       </div>
       {{#if hasPosted}}
-        <p>Thanks for posting, your prize is below.<br>Please enjoy your remaining moments of exclusivity.</p>
-        <img src={{gifUrl}} alt='cat gif prize' style='width:100%'><img>
+      <p>Thanks for posting, your prize is below.<br>Please enjoy your remaining moments of exclusivity.</p>
+      <img src={{gifUrl}} alt='cat gif prize' style='width:100%'><img>
       {{else}}
-        Post a message and receive a prize.
-        {{#autoForm id='postForm' schema=postFormSchema type='method' meteormethod='postMessage' }}
-          {{> afQuickField name='message' label=false afFieldInput-placeholder='Post a message for all to see' }}
-          {{> afQuickField name='link' label=false afFieldInput-placeholder='URL (optional)' }}
-          <button type='submit' style='width: 100%' class='ui primary button'>Post</button>
-        {{/autoForm}}
+      Post a message and receive a prize.
+      {{#autoForm id='postForm' schema=postFormSchema type='method' meteormethod='postMessage' }}
+      {{> afQuickField name='message' label=false afFieldInput-placeholder='Post a message for all to see' }}
+      {{> afQuickField name='link' label=false afFieldInput-placeholder='URL (optional)' }}
+      <button type='submit' style='width: 100%' class='ui primary button'>Post</button>
+      {{/autoForm}}
       {{/if}}
     </div>
   </div>
   {{#if hasPosted}}
-    {{#if html}}
-      <div class='row'>
-        <div class='col-sm-12 col-md-6 col-md-offset-3'>
-          {{{html}}}
-        </div>
-      </div>
-      <hr>
-    {{/if}}
+  {{#if html}}
+  <div class='row inverted'>
+    <div class='col-sm-12 col-md-6 col-md-offset-3'>
+      {{{html}}}
+    </div>
+  </div>
+  <hr>
+  {{/if}}
   {{/if}}
 </template>
