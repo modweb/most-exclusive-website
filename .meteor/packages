@@ -10,8 +10,8 @@ aldeed:collection2
 momentjs:moment
 percolate:synced-cron
 raix:handlebar-helpers
-email
-http
+email@1.2.3
+http@1.4.2
 spiderable
 tmeasday:publish-counts
 matteodem:easy-security
@@ -24,6 +24,8 @@ semantic:ui
 flemay:less-autoprefixer
 jquery
 modweb:flipclock
-standard-minifier-css
-standard-minifier-js
-force-ssl
+standard-minifier-css@1.5.3
+standard-minifier-js@2.4.1
+force-ssl@1.1.0
+shell-server
+dynamic-import
